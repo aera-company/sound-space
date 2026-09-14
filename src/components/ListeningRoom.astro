@@ -1,0 +1,34 @@
+---
+import slow from '../data/68.json';
+import fast from '../data/118.json';
+const tracks = [{...slow, name:'Slow tempo', mood:'Unhurried. Spacious. Grounded.', character:'Warm synth textures, rounded bass and a restrained rhythmic pulse.'},{...fast, name:'Fast tempo', mood:'Flowing. Propulsive. Hypnotic.', character:'Electronic textures, a more insistent pulse and a rolling rhythmic feel.'}];
+---
+<section id="listen" class="listening unified-listening" aria-labelledby="listen-heading">
+ <div class="wrap">
+  <div class="section-line"><h2 id="listen-heading">The listening room</h2><span><span class="status-dot" aria-hidden="true"></span> Original recordings <span class="line-sep">/</span> Headphones welcome</span></div>
+  <section class="analysis" id="analysis" aria-labelledby="analysis-heading">
+   <div class="analysis-header"><div><p class="eyebrow">Two conditions. One listening space.</p><h2 id="analysis-heading">A closer listen.</h2></div><button class="compare-toggle" data-select="compare" aria-pressed="false">Compare recordings</button></div>
+   <div class="recording-choices" role="group" aria-label="Recording to play">
+    {tracks.map((track,i)=><button class="recording-choice" data-select={track.bpm} aria-pressed={i===0?'true':'false'}><span class="choice-top"><span>{track.name}</span><span class="choice-state" aria-hidden="true">{i===0?'Selected':'Select'}</span></span><span class="choice-tempo">{track.bpm}<small>BPM</small></span><span class="choice-mood">{track.mood}</span><span class="choice-character">{track.character}</span></button>)}
+   </div>
+   <div class="analysis-toolbar"><div class="chart-tabs" role="tablist" aria-label="Audio visualisation">{['Frequencies','Spectrogram','Waveform','Loudness'].map((label,i)=><button id={`tab-${label.toLowerCase()}`} role="tab" aria-selected={i===0?'true':'false'} tabindex={i===0?0:-1} aria-controls="chart-panel" data-view={label.toLowerCase()}>{label}</button>)}</div><span id="chart-unit">Live · dBFS / Hz</span></div>
+   <div id="spectrum-controls" class="spectrum-controls" hidden>
+    <div class="spectrum-mode" role="group" aria-label="Frequency analysis mode"><button data-spectrum-mode="live" aria-pressed="true">Live spectrum</button><button data-spectrum-mode="average" aria-pressed="false">File average</button></div>
+    <div class="live-options"><label>Response <select id="spectrum-response"><option value="0.08">Fast</option><option value="0.35">Balanced</option><option value="0.75">Smooth</option></select></label><label>Resolution <select id="spectrum-resolution"><option value="2048">2,048</option><option value="4096" selected>4,096</option><option value="8192">8,192</option></select></label><label class="peak-label"><input id="spectrum-peaks" type="checkbox" checked /> Peak hold</label><button id="spectrum-freeze" aria-pressed="false">Freeze</button><button id="spectrum-reset">Reset peaks</button></div>
+   </div>
+   <div id="chart-panel" role="tabpanel" aria-labelledby="tab-frequencies" tabindex="0"><div id="chart" class="chart"></div><div class="chart-footer"><p id="chart-description">Live FFT of the playing recording, before volume. Solid: current spectrum. Dotted: decaying peak hold.</p><span id="chart-legend">— 68 BPM</span></div></div>
+   <div class="master-player" aria-label="Audio player">
+    <button id="master-play" class="play-button" aria-label="Play 68 BPM"><svg class="play-icon" width="20" height="20" viewBox="0 0 20 20" aria-hidden="true"><path d="M6 3 17 10 6 17Z" fill="currentColor" /></svg><svg class="pause-icon" width="20" height="20" viewBox="0 0 20 20" aria-hidden="true"><path d="M5 3h3v14H5zm7 0h3v14h-3z" fill="currentColor" /></svg><span class="play-caption" aria-hidden="true">Play</span><span class="pause-caption" aria-hidden="true">Pause</span></button>
+    <div class="master-track"><span id="master-label">Listen to 68 BPM</span><span class="master-time"><span id="master-time">0:00</span> / <span id="master-duration">87:38</span></span></div>
+    <div class="master-timeline"><label class="sr-only" for="master-seek">Seek in selected recording</label><input id="master-seek" class="seek" type="range" min="0" max={slow.duration} step=".1" value="0" /></div>
+    <div class="master-options"><label class="loop-label"><input id="loop" type="checkbox" /> Repeat</label><label class="volume-label" for="volume">Volume <input id="volume" type="range" min="0" max="1" step="0.01" value="0.7" /></label></div>
+   </div>
+   <p id="playback-status" class="master-status" role="status">Choose a tempo, then press play. Switch views while you listen.</p>
+   {tracks.map(track=><audio id={`audio-${track.bpm}`} preload="none" src={`/audio/${track.bpm}.mp3`}></audio>)}
+   <noscript><p>JavaScript is required for the interactive player. Original recordings:</p>{tracks.map(t=><div><p>{t.bpm} BPM</p><audio controls preload="none" src={`/audio/${t.bpm}.mp3`}></audio></div>)}</noscript>
+   <dl class="metrics"><div><dt>Tempo <span>supplied condition</span></dt><dd id="metric-bpm">68 <small>BPM</small></dd></div><div><dt>Integrated loudness</dt><dd id="metric-loudness">{slow.integrated} <small>LUFS</small></dd></div><div><dt>Loudness range</dt><dd id="metric-range">{slow.lra} <small>LU</small></dd></div><div><dt>True peak</dt><dd id="metric-peak">{slow.truePeak} <small>dBTP</small></dd></div></dl>
+   <p class="analysis-note">Summary measurements use the complete original files. Live spectrum analyses the selected recording before the volume control. <a href="#analysis-method">About the analysis</a></p>
+  </section>
+ </div>
+</section>
+<script is:inline type="application/json" id="track-data" set:html={JSON.stringify(tracks)} />

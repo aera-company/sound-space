@@ -1,0 +1,26 @@
+[
+  {
+    "browser": "chromium",
+    "playPause": true,
+    "timeLabels": true,
+    "spectrogramClickAndDrag": true,
+    "loudnessCursor": true,
+    "segmentSpectrumChangesOnSeek": true,
+    "comparePlaybackPreserved": true,
+    "keyboardSeek": true,
+    "responsive": true,
+    "errors": []
+  },
+  {
+    "browser": "webkit",
+    "playPause": true,
+    "timeLabels": true,
+    "spectrogramClickAndDrag": true,
+    "loudnessCursor": true,
+    "segmentSpectrumChangesOnSeek": true,
+    "comparePlaybackPreserved": true,
+    "keyboardSeek": true,
+    "responsive": true,
+    "errors": []
+  }
+]

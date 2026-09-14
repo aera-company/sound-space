@@ -1,0 +1,36 @@
+[
+  {
+    "browser": "chromium",
+    "singleTransport": true,
+    "noAudioPreload": true,
+    "realLiveFFT": true,
+    "subSecondUpdates": true,
+    "freezeWithoutPausing": true,
+    "fftControls": true,
+    "preVolumeAnalysis": true,
+    "exclusiveTrackSwitch": true,
+    "fileAverageComparison": true,
+    "seekAndPlayheads": true,
+    "keyboardControls": true,
+    "repeat": true,
+    "responsive": true,
+    "errors": []
+  },
+  {
+    "browser": "webkit",
+    "singleTransport": true,
+    "noAudioPreload": true,
+    "realLiveFFT": true,
+    "subSecondUpdates": true,
+    "freezeWithoutPausing": true,
+    "fftControls": true,
+    "preVolumeAnalysis": true,
+    "exclusiveTrackSwitch": true,
+    "fileAverageComparison": true,
+    "seekAndPlayheads": true,
+    "keyboardControls": true,
+    "repeat": true,
+    "responsive": true,
+    "errors": []
+  }
+]

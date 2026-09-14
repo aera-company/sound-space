@@ -1,0 +1,46 @@
+[
+  {
+    "engine": "chromium",
+    "playback": true,
+    "exclusivePlayback": true,
+    "seek": true,
+    "volume": true,
+    "repeat": true,
+    "charts": 4,
+    "comparison": true,
+    "keyboardTabs": true,
+    "lightingMatrix": true,
+    "reducedMotion": true,
+    "widths": [
+      320,
+      360,
+      390,
+      768,
+      1440,
+      1920
+    ],
+    "errors": []
+  },
+  {
+    "engine": "webkit",
+    "playback": true,
+    "exclusivePlayback": true,
+    "seek": true,
+    "volume": true,
+    "repeat": true,
+    "charts": 4,
+    "comparison": true,
+    "keyboardTabs": true,
+    "lightingMatrix": true,
+    "reducedMotion": true,
+    "widths": [
+      320,
+      360,
+      390,
+      768,
+      1440,
+      1920
+    ],
+    "errors": []
+  }
+]
