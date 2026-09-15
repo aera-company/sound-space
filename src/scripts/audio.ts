@@ -14,6 +14,7 @@ let context:AudioContext|undefined,analyser:AnalyserNode|undefined,gain:GainNode
 const sources=new Map<number,MediaElementAudioSourceNode>();
 let request=0,frame=0,volume=.7;
 let frozen=false;
+let preview:{button:HTMLElement;bpm:number;start:number;end:number}|undefined;
 const reduced=window.matchMedia('(prefers-reduced-motion: reduce)');
 const duration=Math.max(...tracks.map(t=>t.duration));
 const formatTime=(n:number)=>`${Math.floor(n/60)}:${String(Math.floor(n%60)).padStart(2,'0')}`;
@@ -60,17 +61,19 @@ async function play(bpm:number){
  const token=++request,audio=audios.get(bpm)!;
  for(const other of audios.values())if(other!==audio)other.pause();
  status(`Loading ${bpm} BPM…`);
- await connectAudio(bpm);
- if(token!==request||bpm!==activeBpm)return;
- try{await audio.play();if(token!==request||bpm!==activeBpm){audio.pause();return;}}catch{if(token===request)status('Audio could not start. Check your connection and press play to retry.');}
+// Start both inside the tap handler so mobile browsers retain user activation.
+ const connection=connectAudio(bpm);
+ try{const playback=audio.play();await Promise.all([connection,playback]);if(token!==request||bpm!==activeBpm){if(bpm!==activeBpm)audio.pause();return;}}catch{if(token===request){status('Audio could not start. Check your connection and press play to retry.');if(preview){stopPreview();$('#matrix-status').textContent='The excerpt could not start. Select the photograph to try again.';}}}
  syncPlayer();
 }
 function toggle(){
+ stopPreview();
  const audio=audios.get(activeBpm)!;
  if(!audio.paused){++request;audio.pause();status(`${activeBpm} BPM paused at ${formatTime(audio.currentTime)}.`);}
  else play(activeBpm);
 }
 function chooseTrack(bpm:number,resume=true,redraw=true){
+ stopPreview();
  const wasPlaying=!audios.get(activeBpm)!.paused;
  if(activeBpm!==bpm){++request;for(const a of audios.values())a.pause();activeBpm=bpm;liveSpectrum.setTrack(bpm);}
  if(selected!=='compare')selected=bpm;
@@ -79,11 +82,11 @@ function chooseTrack(bpm:number,resume=true,redraw=true){
  else status(`${bpm} BPM selected. Press play to listen.`);
 }
 $('#master-play').addEventListener('click',toggle);
-$('#master-seek').addEventListener('input',e=>seekTo(activeBpm,Number((e.target as HTMLInputElement).value)));
+$('#master-seek').addEventListener('input',e=>{stopPreview();seekTo(activeBpm,Number((e.target as HTMLInputElement).value));});
 for(const [bpm,audio] of audios){
  audio.volume=volume;
  audio.addEventListener('play',()=>{$('.master-player').classList.remove('is-inviting');playHintObserver.disconnect();for(const other of audios.values())if(other!==audio)other.pause();syncPlayer();animate();});
- audio.addEventListener('pause',()=>{syncPlayer();if(bpm===activeBpm){stopAnimation();updateChartCursor();}});
+ audio.addEventListener('pause',()=>{if(preview?.bpm===bpm&&audio.paused)stopPreview();syncPlayer();if(bpm===activeBpm){stopAnimation();updateChartCursor();}});
  audio.addEventListener('timeupdate',()=>{if(bpm===activeBpm)updateChartCursor();});
  audio.addEventListener('seeked',updateChartCursor);
  audio.addEventListener('loadedmetadata',updateChartCursor);
@@ -112,12 +115,35 @@ document.querySelectorAll<HTMLElement>('[data-select]').forEach(b=>b.addEventLis
  if(b.dataset.select==='compare'){selected=selected==='compare'?activeBpm:'compare';syncPlayer();render();}
  else chooseTrack(Number(b.dataset.select));
 }));
-document.querySelectorAll<HTMLElement>('[data-combination]').forEach(b=>b.addEventListener('click',()=>{
- const bpm=Number(b.dataset.combination);document.body.dataset.light=b.dataset.light;
- document.querySelectorAll('[data-combination]').forEach(other=>other.setAttribute('aria-pressed',String(other===b)));
- chooseTrack(bpm,false);audios.get(bpm)!.pause();
- $('#matrix-status').textContent=`${b.dataset.light==='warm'?'Warm':'Cool'} light + ${bpm} BPM selected. Press play to listen.`;
- $('#listen').scrollIntoView({behavior:reduced.matches?'instant':'smooth'});$('#master-play').focus({preventScroll:true});
+function stopPreview(pause=false){
+ const current=preview;if(!current)return;preview=undefined;
+ current.button.classList.remove('is-previewing');current.button.setAttribute('aria-pressed','false');
+ current.button.setAttribute('aria-label',`Play 30-second excerpt: ${current.button.dataset.light} light + ${current.bpm} BPM`);
+ current.button.querySelector('.sample-icon')!.textContent='▶';current.button.querySelector('.sample-text')!.textContent='Listen · 30 sec';
+ $('#sample-stop').hidden=true;$('#matrix-status').textContent='Excerpt stopped. Choose a photograph to listen again.';
+ if(pause){++request;audios.get(current.bpm)!.pause();}
+}
+function updatePreview(){
+ if(!preview)return;
+ const {button,bpm,start,end}=preview,audio=audios.get(bpm)!;
+ if(audio.currentTime>=end){stopPreview(true);$('#matrix-status').textContent='Excerpt complete. Choose another condition or continue in the listening room.';return;}
+ button.querySelector('.sample-text')!.textContent=`${formatTime(Math.max(0,audio.currentTime-start))} / 0:30 · Stop`;
+}
+$('#sample-stop').addEventListener('click',()=>stopPreview(true));
+document.querySelectorAll<HTMLElement>('[data-combination]').forEach(button=>button.addEventListener('click',()=>{
+ if(preview?.button===button){stopPreview(true);return;}
+ stopPreview(true);
+ const bpm=Number(button.dataset.combination);
+ chooseTrack(bpm,false);
+ for(const a of audios.values())a.pause();
+ document.body.dataset.light=button.dataset.light;
+ preview={button,bpm,start:30,end:60};
+ button.classList.add('is-previewing');button.setAttribute('aria-pressed','true');
+ button.setAttribute('aria-label',`Stop excerpt: ${button.dataset.light} light + ${bpm} BPM`);
+ button.querySelector('.sample-icon')!.textContent='■';
+ $('#sample-stop').hidden=false;
+ $('#matrix-status').textContent=`${button.dataset.light==='warm'?'Warm':'Cool'} light + ${bpm} BPM · playing a 30-second excerpt.`;
+ seekTo(bpm,30);play(bpm);
 }));
 const tabs=Array.from(document.querySelectorAll<HTMLButtonElement>('[data-view]'));
 function setView(tab:HTMLButtonElement){view=tab.dataset.view!;tabs.forEach(b=>{b.setAttribute('aria-selected',String(b===tab));b.tabIndex=b===tab?0:-1;});$('#chart-panel').setAttribute('aria-labelledby',tab.id);render();}
@@ -137,7 +163,7 @@ function updateMetrics(ts:Track[]){
 }
 function displayedTracks(){return selected==='compare'?tracks:[byBpm(selected)];}
 function updateChartCursor(now?:number){
- syncPlayer();
+ syncPlayer();updatePreview();
  for(const t of tracks){
   const audio=audios.get(t.bpm)!;
   const time=audio.currentTime;
@@ -160,7 +186,7 @@ function updateChartCursor(now?:number){
 }
 function bindTimeline(element:HTMLElement|SVGSVGElement, getTime:(e:PointerEvent)=>number, ts:Track[]){
  let dragging=false;
- const seek=(event:PointerEvent)=>{const bpm=ts.length===1?ts[0].bpm:activeBpm;if(bpm!==activeBpm)chooseTrack(bpm,false,false);seekTo(bpm,getTime(event));};
+ const seek=(event:PointerEvent)=>{stopPreview();const bpm=ts.length===1?ts[0].bpm:activeBpm;if(bpm!==activeBpm)chooseTrack(bpm,false,false);seekTo(bpm,getTime(event));};
  element.addEventListener('pointerdown',(event:PointerEvent)=>{
   if(event.button!==0)return;
   dragging=true;element.setPointerCapture(event.pointerId);seek(event);
@@ -193,7 +219,7 @@ function render(){
  const x=view==='frequencies'?scaleLog().domain([30,12000]).range([45,width-15]):scaleLinear().domain([0,duration]).range([45,width-15]);
  const y=scaleLinear().domain(view==='waveform'?[-1,1]:view==='frequencies'?[-100,0]:[-60,0]).range([height-30,12]);
  const ticks=view==='waveform'?[-1,0,1]:view==='frequencies'?[-100,-80,-60,-40,-20,0]:[-60,-45,-30,-15,0];
- const xTicks=view==='frequencies'?[30,100,1000,12000]:width<550?[0,1800,3600,duration]:[0,900,1800,2700,3600,4500,duration];
+ const xTicks=view==='frequencies'?[30,100,1000,12000]:(width<550?[0,.5,1]:[0,.25,.5,.75,1]).map(f=>f*duration);
  let svg=`<svg viewBox="0 0 ${width} ${height}" role="img" aria-label="${escape(view)} comparison: ${ts.map(t=>t.bpm+' BPM').join(' and ')}"><title>${escape(descriptions[view])}</title>`;
  svg+=ticks.map(t=>`<line class="grid-line" x1="45" y1="${y(t)}" x2="${width-15}" y2="${y(t)}"/><text x="33" y="${y(t)+3}" text-anchor="end">${t}</text>`).join('');
  svg+=xTicks.map(t=>`<text x="${x(t)}" y="${height-8}" text-anchor="${t===xTicks[0]?'start':t===xTicks.at(-1)?'end':'middle'}">${view==='frequencies'?(t>=1000?t/1000+'k':t):formatTime(t)}</text>`).join('');
@@ -202,14 +228,14 @@ function render(){
   const points=values.map((v,j)=>[view==='frequencies'?t.frequencies[j]:Math.min(j*t.step+t.step/2,t.duration),v]);
   if(view==='waveform'){
    const path=area().x((d:any)=>x(d[0])).y0((d:any)=>y(-d[1])).y1((d:any)=>y(d[1]))(points as any);
-   svg+=`<path d="${path}" fill="${i?'#efeeea':'var(--accent)'}" fill-opacity="${i?'.10':'.22'}" stroke="${i?'#efeeea':'var(--accent)'}" stroke-width=".6" ${i?'stroke-dasharray="3 2"':''}/>`;
+   svg+=`<path d="${path}" fill="${i?'var(--paper)':'var(--accent)'}" fill-opacity="${i?'.10':'.22'}" stroke="${i?'var(--paper)':'var(--accent)'}" stroke-width=".6" ${i?'stroke-dasharray="3 2"':''}/>`;
   }else{
    const path=line().defined((d:any)=>d[1]!==null).x((d:any)=>x(d[0])).y((d:any)=>y(Math.max(y.domain()[0],Math.min(y.domain()[1],d[1]))))(points as any);
    svg+=`<path class="plot-line ${i?'secondary':''} " d="${path||''}"/>`;
   }
 
  });
- if(view!=='frequencies')svg+=ts.map((t,i)=>`<g data-chart-cursor="${t.bpm}" data-width="${width}" data-label-y="${12+i*23}" class="chart-playhead"><line id="${i?'chart-cursor-'+t.bpm:'chart-cursor'}" y1="12" y2="${height-30}" stroke="${i?'#efeeea':'var(--accent)'}" stroke-width="1.4"/><g data-cursor-label><rect width="94" height="20" rx="2"/><text x="6" y="14">${t.bpm} · 0:00</text></g></g>`).join('');
+ if(view!=='frequencies')svg+=ts.map((t,i)=>`<g data-chart-cursor="${t.bpm}" data-width="${width}" data-label-y="${12+i*23}" class="chart-playhead"><line id="${i?'chart-cursor-'+t.bpm:'chart-cursor'}" y1="12" y2="${height-30}" stroke="${i?'var(--paper)':'var(--accent)'}" stroke-width="1.4"/><g data-cursor-label><rect width="94" height="20" rx="2"/><text x="6" y="14">${t.bpm} · 0:00</text></g></g>`).join('');
  svg+=`<line id="hover-line" y1="12" y2="${height-30}" stroke="var(--muted)" stroke-dasharray="2 3" opacity="0"/></svg><output id="chart-tooltip" class="chart-tooltip" hidden></output>`;
 
  container.innerHTML=svg;

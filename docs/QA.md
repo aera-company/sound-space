@@ -42,7 +42,7 @@ Implemented audio-synchronised time labels on waveform, spectrogram and loudness
 
 Production build and static dataset integrity checks passed. After an initial approval-tool usage-limit block, the prepared local test was approved and executed successfully in Chromium and WebKit. Verified play/pause, labelled waveform and loudness playheads, spectrogram click/drag seeking, segment spectra changing with the selected time, comparison preserved during playback, keyboard seeking, responsive layouts and zero JavaScript errors. See `playhead-results.json`. Earlier Lighthouse scores apply to the previous revision.
 
-## Unified player and live FFT — current revision
+## Unified player and live FFT — earlier full-length audio revision
 
 Production build passed. `scripts/verify-unified.cjs` passed in Chromium and WebKit, with results in `unified-results.json`:
 
@@ -57,3 +57,16 @@ Production build passed. `scripts/verify-unified.cjs` passed in Chromium and Web
 - No JavaScript errors. No offline segment spectra fetched by the new player.
 
 The earlier Lighthouse and accessibility reports are historical and were not rerun for this revision. The browser suites for the earlier layouts are preserved as historical scripts; use verify-unified.cjs for the current interface. Live spectrum is a Web Audio analysis of the supplied audio, not an emulation or calibration of Ableton Spectrum. It shares a playback gain stage after analysis and uses a separate FFT window and time resolution from File average. Methodology and README now explain that distinction.
+
+## X3 audio and photographic experiment revision
+
+- Replaced full-length MP3s with supplied X3 exports under new URLs, stored directly in Git. Original bytes retained: 30,590,400 and 34,497,600 bytes. No LFS pointers needed for current playback.
+- Recalculated RMS, FFT, spectrograms and EBU R128 from these exact files. 68 BPM: 764.760 s, −10.0 LUFS, LRA 5.8 LU, +0.5 dBTP. 118 BPM: 862.440 s, −9.3 LUFS, LRA 3.7 LU, +0.9 dBTP. Updated chart time scales to the shorter recordings.
+- Adjusted playback to call audio.play() within the tap handler while resuming Web Audio, preserving user activation on mobile.
+- Supplied photographs optimized by Astro. Hero gradient uses CSS; source photographs are not recoloured. Overview contains supplied respondent counts, not outcome claims.
+- Four photo conditions share the same player and play 30-second excerpts at 0:30–1:00. Warm/cool conditions of a given tempo use the same excerpt. Exclusive audio, stopping at the excerpt boundary, and switching the light with the same BPM verified.
+- Video remuxed with H.264 stream unchanged, audio removed, faststart enabled. Timed labels and optional VTT cover Neutral/Warm/Cool; labels reflect visual inspection rather than calibrated CCT. Controls and reduced-motion behaviour verified.
+- scripts/verify-media.cjs passed in Chromium desktop and WebKit with mobile viewport/touch enabled. Verified real MP3 decoding and durations, HTTP 206 byte ranges, FFT, timeline seeking, comparison, all photo excerpts, fresh first-tap playback, silent inline video, cue changes, reduced motion, widths 320–1920, and no JavaScript errors. See media-results.json. This is browser emulation, not a test on a physical handset or of a production host.
+- Desktop and mobile screenshots reviewed. White text on bright-purple play control has 4.85:1 contrast. Earlier Lighthouse scores are historical.
+
+The full analyzer regression (verify-unified.cjs) also passed in Chromium and WebKit against the X3 durations: FFT updates, freeze, resolution/response, pre-volume analysis, keyboard seek, repeat and comparison. Audio source SHA-256 equality confirmed against the supplied X3 files. FFprobe confirms that the published video asset contains only a video stream.

@@ -3,15 +3,20 @@ import Layout from "../layouts/Layout.astro";
 import Masthead from "../components/Masthead.astro";
 import ListeningRoom from "../components/ListeningRoom.astro";
 import Research from "../components/Research.astro";
+import { Image } from "astro:assets";
+import hero from "../assets/hero.png";
 ---
 
 <Layout title="Sound, light & space — BENV0008 25/26 · UCL" description="An interactive listening companion to a UCL pilot study on soundscape, lighting and customer experience. Explore the 68 and 118 BPM conditions.">
   <a class="skip-link" href="#listen">Skip to listening</a>
   <Masthead />
   <main id="main">
-    <section class="intro wrap" aria-labelledby="page-title">
+    <section class="hero" aria-labelledby="page-title">
+    <div class="hero-photo"><Image src={hero} alt="Inside The Hanger UCL Store, the setting for the sound and lighting study" widths={[640,1024,1448]} sizes="100vw" width={1448} height={1086} loading="eager" fetchpriority="high" /></div>
+    <div class="intro wrap">
       <div><p class="eyebrow">A study in sensory experience</p><h1 id="page-title">Sound, light &<br />the space between.</h1></div>
       <div class="intro-note"><span class="tiny-cross" aria-hidden="true">+</span><p>Two tempos. One retail space.<br />An invitation to listen to the sound<br class="desktop-break" /> behind the research.</p><a href="#listen" class="text-link">Explore the sound <span aria-hidden="true">↓</span></a></div>
+    </div>
     </section>
     <ListeningRoom />
     <Research />

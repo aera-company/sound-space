@@ -11,7 +11,7 @@ SR, FFT, STEP = 24000, 2048, 5
 FREQS = np.geomspace(30, 12000, 192)
 
 for bpm in (68, 118):
-    source = ROOT / 'public' / 'audio' / f'{bpm}.mp3'
+    source = ROOT / 'public' / 'audio' / f'{bpm}-x3.mp3'
     meta = json.loads(subprocess.check_output(['ffprobe','-v','quiet','-show_format','-show_streams','-of','json',str(source)]))
     duration = float(meta['format']['duration'])
     print(f'Analysing {bpm} BPM: {duration:.2f}s', flush=True)

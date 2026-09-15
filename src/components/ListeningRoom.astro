@@ -5,7 +5,7 @@ const tracks = [{...slow, name:'Slow tempo', mood:'Unhurried. Spacious. Grounded
 ---
 <section id="listen" class="listening unified-listening" aria-labelledby="listen-heading">
  <div class="wrap">
-  <div class="section-line"><h2 id="listen-heading">The listening room</h2><span><span class="status-dot" aria-hidden="true"></span> Original recordings <span class="line-sep">/</span> Headphones welcome</span></div>
+  <div class="section-line"><h2 id="listen-heading">The listening room</h2><span><span class="status-dot" aria-hidden="true"></span> X3 recordings <span class="line-sep">/</span> Headphones welcome</span></div>
   <section class="analysis" id="analysis" aria-labelledby="analysis-heading">
    <div class="analysis-header"><div><p class="eyebrow">Two conditions. One listening space.</p><h2 id="analysis-heading">A closer listen.</h2></div><button class="compare-toggle" data-select="compare" aria-pressed="false">Compare recordings</button></div>
    <div class="recording-choices" role="group" aria-label="Recording to play">
@@ -19,15 +19,15 @@ const tracks = [{...slow, name:'Slow tempo', mood:'Unhurried. Spacious. Grounded
    <div id="chart-panel" role="tabpanel" aria-labelledby="tab-frequencies" tabindex="0"><div id="chart" class="chart"></div><div class="chart-footer"><p id="chart-description">Live FFT of the playing recording, before volume. Solid: current spectrum. Dotted: decaying peak hold.</p><span id="chart-legend">— 68 BPM</span></div></div>
    <div class="master-player" aria-label="Audio player">
     <button id="master-play" class="play-button" aria-label="Play 68 BPM"><svg class="play-icon" width="20" height="20" viewBox="0 0 20 20" aria-hidden="true"><path d="M6 3 17 10 6 17Z" fill="currentColor" /></svg><svg class="pause-icon" width="20" height="20" viewBox="0 0 20 20" aria-hidden="true"><path d="M5 3h3v14H5zm7 0h3v14h-3z" fill="currentColor" /></svg><span class="play-caption" aria-hidden="true">Play</span><span class="pause-caption" aria-hidden="true">Pause</span></button>
-    <div class="master-track"><span id="master-label">Listen to 68 BPM</span><span class="master-time"><span id="master-time">0:00</span> / <span id="master-duration">87:38</span></span></div>
+    <div class="master-track"><span id="master-label">Listen to 68 BPM</span><span class="master-time"><span id="master-time">0:00</span> / <span id="master-duration">12:44</span></span></div>
     <div class="master-timeline"><label class="sr-only" for="master-seek">Seek in selected recording</label><input id="master-seek" class="seek" type="range" min="0" max={slow.duration} step=".1" value="0" /></div>
     <div class="master-options"><label class="loop-label"><input id="loop" type="checkbox" /> Repeat</label><label class="volume-label" for="volume">Volume <input id="volume" type="range" min="0" max="1" step="0.01" value="0.7" /></label></div>
    </div>
    <p id="playback-status" class="master-status" role="status">Choose a tempo, then press play. Switch views while you listen.</p>
-   {tracks.map(track=><audio id={`audio-${track.bpm}`} preload="none" src={`/audio/${track.bpm}.mp3`}></audio>)}
-   <noscript><p>JavaScript is required for the interactive player. Original recordings:</p>{tracks.map(t=><div><p>{t.bpm} BPM</p><audio controls preload="none" src={`/audio/${t.bpm}.mp3`}></audio></div>)}</noscript>
+   {tracks.map(track=><audio id={`audio-${track.bpm}`} preload="none" src={`/audio/${track.bpm}-x3.mp3`}></audio>)}
+   <noscript><p>JavaScript is required for the interactive player. X3 recordings:</p>{tracks.map(t=><div><p>{t.bpm} BPM</p><audio controls preload="none" src={`/audio/${t.bpm}-x3.mp3`}></audio></div>)}</noscript>
    <dl class="metrics"><div><dt>Tempo <span>supplied condition</span></dt><dd id="metric-bpm">68 <small>BPM</small></dd></div><div><dt>Integrated loudness</dt><dd id="metric-loudness">{slow.integrated} <small>LUFS</small></dd></div><div><dt>Loudness range</dt><dd id="metric-range">{slow.lra} <small>LU</small></dd></div><div><dt>True peak</dt><dd id="metric-peak">{slow.truePeak} <small>dBTP</small></dd></div></dl>
-   <p class="analysis-note">Summary measurements use the complete original files. Live spectrum analyses the selected recording before the volume control. <a href="#analysis-method">About the analysis</a></p>
+   <p class="analysis-note">Summary measurements use the complete supplied X3 files. Live spectrum analyses the selected recording before the volume control. <a href="#analysis-method">About the analysis</a></p>
   </section>
  </div>
 </section>

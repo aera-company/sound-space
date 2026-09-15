@@ -2,18 +2,14 @@
 
 Onepage em inglês para o experimento do módulo BENV0008 25/26. Construída sobre esta base Astro, com JavaScript apenas para áudio e gráficos D3.
 
-## Clonar com os áudios completos
-
-Os MP3 são versionados com **Git LFS**. Instale o Git LFS antes de clonar:
+## Clonar
 
 ```sh
-git lfs install
 git clone https://github.com/aera-company/sound-space.git
 cd sound-space
-git lfs pull
 ```
 
-No ambiente de build, confirme que o checkout baixa os objetos LFS antes de executar o Astro; os arquivos em `public/audio/` precisam ser os MP3 completos, não apenas os ponteiros LFS.
+As versões atuais X3 dos MP3 estão diretamente no Git (30,6 e 34,5 MB), sem depender de Git LFS no checkout ou no build. O histórico inicial conserva os ponteiros LFS das versões anteriores; não é necessário baixar esses arquivos para executar a página atual.
 
 ## Executar
 
@@ -34,21 +30,23 @@ O build estático é gerado em `dist/`. Não foi publicado nesta etapa.
 ## Conteúdo
 
 - `src/components/ListeningRoom.astro`: duas condições, um player completo e análise.
-- `src/components/Research.astro`: luz × música, fotos, metodologia e créditos.
+- `src/components/Research.astro`: fotos clicáveis das quatro condições, overview, vídeo, medidores e metodologia.
+- `src/scripts/experiment.ts`: legendas e reprodução do vídeo ao entrar em tela.
+- `public/video/lighting.mp4`: vídeo com a faixa de áudio removida e faststart; VTT com condições de luz.
 - `src/scripts/audio.ts`: reprodução exclusiva, volume, repetição, busca e gráficos.
 - `src/scripts/spectrum.ts`: FFT ao vivo, suavização, resolução, picos e leitura de frequências.
 - `src/styles/global.css`: identidade editorial e responsividade.
 - `src/data/68.json` e `118.json`: medidas reais dos arquivos completos.
-- `public/audio/`: cópias dos MP3 originais, sem processamento ou normalização.
+- `public/audio/`: cópias inalteradas dos MP3 X3 fornecidos, sem normalização.
 - `public/analysis/`: espectrogramas previamente calculados.
 - `scripts/analyze_audio.py`: regeneração reprodutível das medidas e espectrogramas.
 - `docs/`: direção criativa, verificação e resultados dos testes.
 
 ## Atualizar as músicas
 
-Substitua as cópias em `public/audio/68.mp3` e `public/audio/118.mp3`, execute `scripts/analyze_audio.py` com Python + NumPy + Pillow, com FFmpeg e FFprobe no PATH, e reconstrua o site. Os BPMs são identificadores fornecidos pelo projeto, não estimativas automáticas.
+Substitua as cópias em `public/audio/68-x3.mp3` e `public/audio/118-x3.mp3`, execute `scripts/analyze_audio.py` com Python + NumPy + Pillow, com FFmpeg e FFprobe no PATH, e reconstrua o site. Os BPMs são identificadores fornecidos pelo projeto, não estimativas automáticas.
 
-Os arquivos completos têm aproximadamente 201 e 197 MiB. `preload="none"` evita baixá-los na abertura; os gráficos usam dados calculados previamente. Para publicar, o serviço de hospedagem precisa servir arquivos grandes com HTTP Range. Se os áudios forem movidos para outro domínio, configure CORS e o atributo `crossorigin` antes de utilizar Web Audio. Nenhum domínio foi presumido para canonical.
+As faixas X3 têm 12:44,760 (68 BPM) e 14:22,440 (118 BPM), com aproximadamente 29,2 e 32,9 MiB. `preload="none"` evita baixá-los na abertura; os gráficos usam dados calculados previamente. Para publicar, o serviço de hospedagem precisa servir arquivos grandes com HTTP Range. Se os áudios forem movidos para outro domínio, configure CORS e o atributo `crossorigin` antes de utilizar Web Audio. Nenhum domínio foi presumido para canonical.
 
 ## Análise
 
@@ -73,3 +71,15 @@ O grafo é MediaElementSource → Analyser → Gain → saída. O volume fica de
 Os dados `*-segments.json` preservados em public/analysis são produtos da análise offline e não são carregados pelo player atual. A cor do espectrograma segue a referência black/violet/red/yellow na escala comum documentada.
 
 Verificação atual: `NODE_PATH=/path/to/runtime/node_modules node scripts/verify-unified.cjs`, com Playwright Chromium e WebKit e a prévia em `http://127.0.0.1:4322`. Resultado em `docs/unified-results.json`.
+
+## Fotografias, vídeo e amostras
+
+A paleta foi amostrada do cartão palette.jpg: dark purple #331c52, off white #fbf9fc, paper white #ffffff, bright purple #8e45f6, heritage blue #86d4fb, pale purple #ebdefc, light purple #d7bdfa e mid purple #b384f8. A paleta quantitativa do espectrograma continua black/violet/red/yellow, como na referência específica desse gráfico.
+
+Hero com imagem fornecida e degradê CSS branco; fotos originais das condições sem filtros de cor. A visão geral e os números de respondentes vêm de experimentar overview.jpg. A fotografia dos medidores documenta o método e não é usada como medida representativa de todo o experimento.
+
+Cada foto de condição toca o intervalo 0:30–1:00 da faixa X3 correspondente, com um único player. As duas condições que usam o mesmo BPM usam o mesmo trecho. Novo clique, Stop excerpt ou o fim de 30 segundos interrompem o trecho. O player principal pode continuar a gravação completa.
+
+O vídeo de 53,9 s foi remuxado sem áudio, sem recompressão visual, com faststart. Legendas de luz em experiment.ts e lighting.vtt foram alinhadas por inspeção do filme (aproximadamente 0,1 s); são descrições visuais, não medidas de CCT. Ele toca mudo, inline, quando visível; pausa fora de tela e permite pausa/busca manual. Com reduced motion, aguarda play.
+
+Verificação desta revisão: scripts/verify-media.cjs (desktop e WebKit mobile, resultados em docs/media-results.json) e scripts/verify-unified.cjs para os controles completos do analisador.

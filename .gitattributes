@@ -1,1 +1,1 @@
-public/audio/*.mp3 filter=lfs diff=lfs merge=lfs -text
+# The current X3 MP3 files are stored directly in Git for portable static builds.

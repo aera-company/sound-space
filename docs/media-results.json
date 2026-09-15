@@ -1,0 +1,36 @@
+[
+  {
+    "browser": "chromium-desktop",
+    "newAudioPlayback": true,
+    "httpRange": true,
+    "liveFFT": true,
+    "recalculatedTimelines": true,
+    "comparison": true,
+    "fourPhotoExcerpts": true,
+    "sameTempoSwitch": true,
+    "excerptStopsAfter30Seconds": true,
+    "videoMutedInline": true,
+    "videoCueLabels": true,
+    "reducedMotion": true,
+    "freshPhotoTapPlayback": true,
+    "responsive": true,
+    "errors": []
+  },
+  {
+    "browser": "webkit-mobile",
+    "newAudioPlayback": true,
+    "httpRange": true,
+    "liveFFT": true,
+    "recalculatedTimelines": true,
+    "comparison": true,
+    "fourPhotoExcerpts": true,
+    "sameTempoSwitch": true,
+    "excerptStopsAfter30Seconds": true,
+    "videoMutedInline": true,
+    "videoCueLabels": true,
+    "reducedMotion": true,
+    "freshPhotoTapPlayback": true,
+    "responsive": true,
+    "errors": []
+  }
+]
