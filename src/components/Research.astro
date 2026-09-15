@@ -6,9 +6,7 @@ import cool from '../assets/cool.jpg';
 import neutral from '../assets/video-poster.jpg';
 import gallery01 from '../assets/gallery-01.jpg';
 import gallery02 from '../assets/gallery-02.jpg';
-import gallery03 from '../assets/gallery-03.jpg';
 import gallery04 from '../assets/gallery-04.jpg';
-import gallery05 from '../assets/gallery-05.jpg';
 import gallery06 from '../assets/gallery-06.jpg';
 const conditions=[
  {id:'A',light:'warm',tempo:'fast',bpm:118,date:'Wednesday, 19 August',n:37},
@@ -19,9 +17,7 @@ const conditions=[
 const gallery=[
  {src:gallery01,alt:'Warm-lit display wall inside The Hanger UCL Store'},
  {src:gallery02,alt:'Wide view of The Hanger UCL Store and its display fixtures'},
- {src:gallery03,alt:'Store aisle with merchandise displays under neutral light'},
  {src:gallery04,alt:'Customers and merchandise inside The Hanger UCL Store'},
- {src:gallery05,alt:'Purple UCL merchandise displayed in the store'},
  {src:gallery06,alt:'Lux and sound level meters used during the field study'},
 ];
 ---
@@ -60,7 +56,7 @@ const gallery=[
 <ListeningRoom />
 
 <section id="gallery" class="project-gallery" aria-labelledby="gallery-heading">
-  <div class="wrap"><div class="section-line light-line"><span>Project notes</span><span>Field documentation</span></div><div class="gallery-heading"><div><p class="eyebrow">Inside the study</p><h2 id="gallery-heading">Project in view.</h2></div><p>Six details from the UCL Store, including the space, its lighting and the environmental measurements.</p></div></div>
+  <div class="wrap"><div class="section-line light-line"><span>Project notes</span><span>Field documentation</span></div><div class="gallery-heading"><div><p class="eyebrow">Inside the study</p><h2 id="gallery-heading">Project in view.</h2></div><p>Four details from the UCL Store, including the space, its lighting and the environmental measurements.</p></div></div>
   <div class="gallery-shell">
     <div class="gallery-viewport" data-gallery tabindex="0" aria-label="Project photo gallery">
       {gallery.map((item,i)=><figure class="gallery-slide" data-gallery-slide aria-label={`Photo ${i+1} of ${gallery.length}`}><Image src={item.src} alt={item.alt} widths={[640,1000,1600,2200]} sizes="(max-width:760px) 88vw, 78vw" loading="lazy" /><figcaption><span>{String(i+1).padStart(2,'0')} / {String(gallery.length).padStart(2,'0')}</span><span>Field documentation · The Hanger</span></figcaption></figure>)}

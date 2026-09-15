@@ -32,7 +32,7 @@ const assert = require('node:assert/strict');
   mobile.on('pageerror',error=>errors.push(`mobile: ${error.message}`));
   await mobile.goto('http://127.0.0.1:4322/',{waitUntil:'networkidle'});
   assert.equal(await mobile.locator('.room-condition').count(),4);
-  assert.equal(await mobile.locator('.gallery-slide').count(),6);
+  assert.equal(await mobile.locator('.gallery-slide').count(),4);
   assert.equal(await mobile.locator('body').evaluate(el=>el.scrollWidth<=innerWidth+1),true,'mobile page should not overflow horizontally');
   await mobile.screenshot({path:'/tmp/sound-space-mobile.png',fullPage:true});
   assert.deepEqual(errors,[]);
