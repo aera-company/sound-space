@@ -6,7 +6,7 @@ Palette: supplied UCL card, sampled from the JPEG — white #ffffff, dark purple
 
 Type: Georgia for editorial titles and large tempos; Helvetica Neue / Arial for interface and data. Display 76–104px, headings 36–64px, body 16px, labels 12px. No remote font dependency.
 
-Layout: left-aligned masthead; a full-width store photograph with a white bottom gradient and editorial title above two equal recording selectors inside one analysis station; a single shared transport below the chart; a photographic 2 × 2 condition gallery with shared 30-second audio excerpts; supplied overview; a silent film with timed lighting labels; field meter photograph next to methodology; methods and credits. The shared waveform is the signature. Fine rules represent actual chart axes or section boundaries.
+Layout: academic cover with the full research title, institutional metadata and a field photograph; two equal recording selectors inside one analysis station; a single shared transport below the chart; one immersive store scene with four condition controls and shared 30-second audio excerpts; vector experiment overview; a silent film with timed lighting labels; field meter photograph next to methodology; methods and credits. The live audio analysis is the signature. Fine rules represent actual chart axes or section boundaries.
 
 Reviewed against the brief: reject the skill database's unrelated wellness and biotech recommendations. No promotional carousel, pricing, stock artwork or atmospheric looping animation. Use the user's black/off-white direction, actual store photos and measured audio. Playback drives the live FFT and timeline playheads. Reduced-motion keeps the data and transport functional without animated signal decoration.
 

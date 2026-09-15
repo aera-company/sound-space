@@ -70,3 +70,11 @@ The earlier Lighthouse and accessibility reports are historical and were not rer
 - Desktop and mobile screenshots reviewed. White text on bright-purple play control has 4.85:1 contrast. Earlier Lighthouse scores are historical.
 
 The full analyzer regression (verify-unified.cjs) also passed in Chromium and WebKit against the X3 durations: FFT updates, freeze, resolution/response, pre-volume analysis, keyboard seek, repeat and comparison. Audio source SHA-256 equality confirmed against the supplied X3 files. FFprobe confirms that the published video asset contains only a video stream.
+
+## Academic cover and condition scene revision
+
+- Replaced the promotional hero language with the research title, pilot-study subtitle, Module BENV0008, Dissertation 25/26, student code WHBQ3, programme, institute and supervisor information from the supplied project cover.
+- Reframed the store image as a documented study setting within an academic-cover composition. Page title and description now use the research subject.
+- Replaced the repeated photographic cards with one immersive store scene and four accessible condition controls. The supplied UCL palette distinguishes the controls while retaining the actual B/A/D/C labels, BPMs and respondent counts.
+- Existing audio semantics are unchanged: each condition plays 0:30–1:00 through the shared player, exposes its pressed state and visual progress, stops exclusively and restores focus after the separate stop action.
+- Astro production build passed. `scripts/verify-media.cjs` passed in Chromium desktop and WebKit mobile after the structural change. Screenshots were reviewed at 1440 × 1100 and 390 × 844, with no horizontal overflow.

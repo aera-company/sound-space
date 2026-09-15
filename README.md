@@ -30,7 +30,7 @@ O build estático é gerado em `dist/`. O site publicado é https://sound-space-
 ## Conteúdo
 
 - `src/components/ListeningRoom.astro`: duas condições, um player completo e análise.
-- `src/components/Research.astro`: fotos clicáveis das quatro condições, overview, vídeo, medidores e metodologia.
+- `src/components/Research.astro`: cena interativa das quatro condições, overview, vídeo, medidores e metodologia.
 - `src/scripts/experiment.ts`: legendas e reprodução do vídeo ao entrar em tela.
 - `public/video/lighting.mp4`: vídeo com a faixa de áudio removida e faststart; VTT com condições de luz.
 - `src/scripts/audio.ts`: reprodução exclusiva, volume, repetição, busca e gráficos.
@@ -76,9 +76,9 @@ Verificação atual: `NODE_PATH=/path/to/runtime/node_modules node scripts/verif
 
 A paleta foi amostrada do cartão palette.jpg: dark purple #331c52, off white #fbf9fc, paper white #ffffff, bright purple #8e45f6, heritage blue #86d4fb, pale purple #ebdefc, light purple #d7bdfa e mid purple #b384f8. A paleta quantitativa do espectrograma continua black/violet/red/yellow, como na referência específica desse gráfico.
 
-Hero com imagem fornecida e degradê CSS branco; fotos originais das condições sem filtros de cor. A visão geral e os números de respondentes vêm de experimentar overview.jpg. A fotografia dos medidores documenta o método e não é usada como medida representativa de todo o experimento.
+A hero foi reorganizada como uma capa acadêmica digital a partir da capa fornecida: título completo da pesquisa, subtítulo do piloto, módulo, código do estudante, programa, instituto e supervisores. A fotografia da loja documenta o local do estudo. As fotos originais das condições permanecem sem filtros de cor. A visão geral e os números de respondentes vêm de experimentar overview.jpg. A fotografia dos medidores documenta o método e não é usada como medida representativa de todo o experimento.
 
-Cada foto de condição toca o intervalo 0:30–1:00 da faixa X3 correspondente, com um único player. As duas condições que usam o mesmo BPM usam o mesmo trecho. Novo clique, Stop excerpt ou o fim de 30 segundos interrompem o trecho. O player principal pode continuar a gravação completa.
+Cada cartão da cena experimental toca o intervalo 0:30–1:00 da faixa X3 correspondente, com um único player. As duas condições que usam o mesmo BPM usam o mesmo trecho. Novo clique, Stop excerpt ou o fim de 30 segundos interrompem o trecho. O player principal pode continuar a gravação completa.
 
 O vídeo de 53,9 s foi remuxado sem áudio, sem recompressão visual, com faststart. Legendas de luz em experiment.ts e lighting.vtt foram alinhadas por inspeção do filme (aproximadamente 0,1 s); são descrições visuais, não medidas de CCT. Ele toca mudo, inline, quando visível; pausa fora de tela e permite pausa/busca manual. Com reduced motion, aguarda play.
 
@@ -88,4 +88,4 @@ Verificação desta revisão: scripts/verify-media.cjs (desktop e WebKit mobile,
 
 A imagem de baixa resolução foi recriada como arte vetorial a partir dos mesmos quatro grupos, datas e números de respondentes. A composição em `motion/overview` gera um MP4 de 8 segundos (1920 × 1680, 30 fps) e o SVG estático, ambos a partir do mesmo componente React. Consulte o README desse diretório para regenerar. A página não carrega React ou Remotion: usa vídeo nativo e SVG.
 
-O overview destaca cada condição uma vez ao entrar em tela, permite pausa e replay e respeita reduced motion. Uma tabela HTML oferece os mesmos dados. As fotos mostram progresso real do trecho; navegação, seletores e aberturas têm transições discretas, com foco por teclado preservado.
+O overview destaca cada condição uma vez ao entrar em tela, permite pausa e replay e respeita reduced motion. Uma tabela HTML oferece os mesmos dados. Os cartões da cena experimental mostram o progresso real do trecho; navegação, seletores e aberturas têm transições discretas, com foco por teclado preservado.

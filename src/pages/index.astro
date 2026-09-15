@@ -7,16 +7,31 @@ import { Image } from "astro:assets";
 import hero from "../assets/hero.png";
 ---
 
-<Layout title="Sound, light & space — BENV0008 25/26 · UCL" description="An interactive listening companion to a UCL pilot study on soundscape, lighting and customer experience. Explore the 68 and 118 BPM conditions.">
+<Layout title="Soundscape and Lighting in Retail Environments — BENV0008 25/26 · UCL" description="A small-scale pilot study in the UCL Store investigating soundscape, lighting, customer behaviour and spatial experience.">
   <a class="skip-link" href="#listen">Skip to listening</a>
   <Masthead />
   <main id="main">
-    <section class="hero" aria-labelledby="page-title">
-    <div class="hero-photo"><Image src={hero} alt="Inside The Hanger UCL Store, the setting for the sound and lighting study" widths={[640,1024,1448]} sizes="100vw" width={1448} height={1086} loading="eager" fetchpriority="high" /></div>
-    <div class="intro wrap">
-      <div><p class="eyebrow">A study in sensory experience</p><h1 id="page-title">Sound, light &<br />the space between.</h1></div>
-      <div class="intro-note"><span class="tiny-cross" aria-hidden="true">+</span><p>Two tempos. One retail space.<br />An invitation to listen to the sound<br class="desktop-break" /> behind the research.</p><a href="#listen" class="text-link">Explore the sound <span aria-hidden="true">↓</span></a></div>
-    </div>
+    <section class="hero project-cover wrap" aria-labelledby="page-title">
+      <div class="cover-index">
+        <p><strong>Module BENV0008</strong><span>Dissertation 25/26</span></p>
+        <p><span>Student</span><strong>WHBQ3</strong></p>
+      </div>
+      <div class="cover-body">
+        <div class="cover-title">
+          <p class="cover-context">MSc Health, Wellbeing and Sustainable Buildings</p>
+          <h1 id="page-title">The Influence of Soundscape and Lighting on Customer Behaviour and Spatial Experience in Retail Environments</h1>
+          <p class="cover-subtitle">A small-scale pilot study in the UCL Store — The Hanger</p>
+        </div>
+        <figure class="cover-image">
+          <Image src={hero} alt="Inside The Hanger UCL Store, the setting for the sound and lighting study" widths={[640,960,1200]} sizes="(max-width:760px) 100vw, 43vw" width={1448} height={1086} loading="eager" fetchpriority="high" />
+          <figcaption><span>The study setting</span><span>The Hanger · UCL Store</span></figcaption>
+        </figure>
+      </div>
+      <div class="cover-footer">
+        <div class="cover-institution"><strong>University College London</strong><span>UCL Institute for Environmental Design &amp; Engineering</span></div>
+        <dl class="cover-supervisors"><div><dt>1st Supervisor</dt><dd>Dr. Prof. Francesco Aletta</dd></div><div><dt>2nd Supervisor</dt><dd>Dr. Prof. Gemma Moore</dd></div></dl>
+        <a href="#listen" class="cover-entry">Listen to the two conditions <span aria-hidden="true">↓</span></a>
+      </div>
     </section>
     <ListeningRoom />
     <Research />

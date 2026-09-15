@@ -63,7 +63,7 @@ async function play(bpm:number){
  status(`Loading ${bpm} BPM…`);
 // Start both inside the tap handler so mobile browsers retain user activation.
  const connection=connectAudio(bpm);
- try{const playback=audio.play();await Promise.all([connection,playback]);if(token!==request||bpm!==activeBpm){if(bpm!==activeBpm)audio.pause();return;}}catch{if(token===request){status('Audio could not start. Check your connection and press play to retry.');if(preview){stopPreview();$('#matrix-status').textContent='The excerpt could not start. Select the photograph to try again.';}}}
+ try{const playback=audio.play();await Promise.all([connection,playback]);if(token!==request||bpm!==activeBpm){if(bpm!==activeBpm)audio.pause();return;}}catch{if(token===request){status('Audio could not start. Check your connection and press play to retry.');if(preview){stopPreview();$('#matrix-status').textContent='The excerpt could not start. Select the condition to try again.';}}}
  syncPlayer();
 }
 function toggle(){
@@ -120,7 +120,7 @@ function stopPreview(pause=false){
  current.button.classList.remove('is-previewing');current.button.setAttribute('aria-pressed','false');
  current.button.setAttribute('aria-label',`Play 30-second excerpt: ${current.button.dataset.light} light + ${current.bpm} BPM`);
  current.button.style.removeProperty('--sample-progress');current.button.querySelector('.sample-text')!.textContent='Listen · 30 sec';
- $('#sample-stop').hidden=true;$('#matrix-status').textContent='Excerpt stopped. Choose a photograph to listen again.';
+ $('#sample-stop').hidden=true;$('#matrix-status').textContent='Excerpt stopped. Choose a condition to listen again.';
  if(pause){++request;audios.get(current.bpm)!.pause();}
 }
 function updatePreview(){
