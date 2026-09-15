@@ -112,7 +112,10 @@ $('#volume').addEventListener('input',e=>{
 });
 $('#loop').addEventListener('change',e=>{for(const audio of audios.values())audio.loop=(e.target as HTMLInputElement).checked;});
 document.querySelectorAll<HTMLElement>('[data-select]').forEach(b=>b.addEventListener('click',()=>{
- if(b.dataset.select==='compare'){selected=selected==='compare'?activeBpm:'compare';syncPlayer();render();}
+ if(b.dataset.select==='compare'){
+  selected=selected==='compare'?activeBpm:'compare';syncPlayer();
+  if(selected==='compare')setView(tabs.find(tab=>tab.dataset.view==='spectrogram')!,false);else render();
+ }
  else chooseTrack(Number(b.dataset.select));
 }));
 function stopPreview(pause=false){

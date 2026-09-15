@@ -3,11 +3,11 @@ import slow from '../data/68.json';
 import fast from '../data/118.json';
 const tracks = [{...slow, name:'Slow tempo', mood:'Unhurried. Spacious. Grounded.', character:'Warm synth textures, rounded bass and a restrained rhythmic pulse.'},{...fast, name:'Fast tempo', mood:'Flowing. Propulsive. Hypnotic.', character:'Electronic textures, a more insistent pulse and a rolling rhythmic feel.'}];
 ---
-<section id="listen" class="listening unified-listening" aria-labelledby="listen-heading">
+<section id="listen" class="listening unified-listening" data-theme="purple" aria-labelledby="listen-heading">
  <div class="wrap">
-  <div class="section-line"><h2 id="listen-heading">The listening room</h2><span><span class="status-dot" aria-hidden="true"></span> X3 recordings <span class="line-sep">/</span> Headphones welcome</span></div>
+  <div class="section-line"><h2 id="listen-heading">The listening room</h2><div class="listening-theme" role="group" aria-label="Listening room colour"><span>Room colour</span><button data-listening-theme="purple" aria-label="Use purple listening room" aria-pressed="true"><i></i>Purple</button><button data-listening-theme="white" aria-label="Use white listening room" aria-pressed="false"><i></i>White</button></div><span><span class="status-dot" aria-hidden="true"></span> X3 recordings <span class="line-sep">/</span> Headphones welcome</span></div>
   <section class="analysis" id="analysis" aria-labelledby="analysis-heading">
-   <div class="analysis-header"><div><p class="eyebrow">Two conditions. One listening space.</p><h2 id="analysis-heading">A closer listen.</h2></div><button class="compare-toggle" data-select="compare" aria-pressed="false">Compare recordings</button></div>
+   <div class="analysis-header"><div><p class="eyebrow">Two conditions. One listening space.</p><h2 id="analysis-heading">A closer listen.</h2></div><button class="compare-toggle" data-select="compare" aria-pressed="false">Compare spectrograms</button></div>
    <div class="recording-choices" role="group" aria-label="Recording to play">
     {tracks.map((track,i)=><button class="recording-choice" data-select={track.bpm} aria-pressed={i===0?'true':'false'}><span class="choice-top"><span>{track.name}</span><span class="choice-state" aria-hidden="true">{i===0?'Selected':'Select'}</span></span><span class="choice-tempo">{track.bpm}<small>BPM</small></span><span class="choice-mood">{track.mood}</span><span class="choice-character">{track.character}</span></button>)}
    </div>
@@ -27,7 +27,8 @@ const tracks = [{...slow, name:'Slow tempo', mood:'Unhurried. Spacious. Grounded
    {tracks.map(track=><audio id={`audio-${track.bpm}`} preload="none" src={`/audio/${track.bpm}-x3.mp3`}></audio>)}
    <noscript><p>JavaScript is required for the interactive player. X3 recordings:</p>{tracks.map(t=><div><p>{t.bpm} BPM</p><audio controls preload="none" src={`/audio/${t.bpm}-x3.mp3`}></audio></div>)}</noscript>
    <dl class="metrics"><div><dt>Tempo <span>supplied condition</span></dt><dd id="metric-bpm">68 <small>BPM</small></dd></div><div><dt>Integrated loudness</dt><dd id="metric-loudness">{slow.integrated} <small>LUFS</small></dd></div><div><dt>Loudness range</dt><dd id="metric-range">{slow.lra} <small>LU</small></dd></div><div><dt>True peak</dt><dd id="metric-peak">{slow.truePeak} <small>dBTP</small></dd></div></dl>
-   <p class="analysis-note">Summary measurements use the complete supplied X3 files. Live spectrum analyses the selected recording before the volume control. <a href="#analysis-method">About the analysis</a></p>
+   <p class="analysis-note">Summary measurements use the complete supplied X3 files. Live spectrum analyses the selected recording before the volume control.</p>
+   <details id="analysis-method" class="audio-method"><summary>How to read the audio <span aria-hidden="true">+</span></summary><div class="audio-method-grid"><p><strong>Waveform</strong><br />RMS amplitude of a mono downmix in 5-second windows. The playhead follows the recording and every time-based view can be used to seek.</p><p><strong>Spectrogram &amp; frequencies</strong><br />Hann-window FFT analysis displayed from 30 Hz to 12 kHz. File average shows mean spectral power; the live spectrum uses the browser audio signal.</p><p><strong>Loudness</strong><br />EBU R128 analysis of the complete stereo files: integrated loudness in LUFS, loudness range in LU and true peak in dBTP.</p><p><strong>Playback</strong><br />Both recordings play at their original speed without loudness normalisation. The BPM values identify the supplied musical conditions.</p></div><p class="audio-method-note">File visualisations use <a href="https://d3js.org/" target="_blank" rel="noopener noreferrer">D3</a>. Spectrograms share the same black–violet–red–yellow scale, so their intensity can be compared directly.</p></details>
   </section>
  </div>
 </section>

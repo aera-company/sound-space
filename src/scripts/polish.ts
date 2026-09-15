@@ -4,7 +4,7 @@ root.dataset.input='pointer';
 document.addEventListener('pointerdown',()=>{root.dataset.input='pointer';},{passive:true});
 document.addEventListener('keydown',()=>{root.dataset.input='keyboard';});
 // Only image and contextual copy reveal; numerical plots stay stable.
-const reveals=document.querySelectorAll<HTMLElement>('.conditions-heading,.place-caption,.measurement-photo');
+const reveals=document.querySelectorAll<HTMLElement>('.explore-heading,.light-study-heading,.gallery-heading');
 const revealObserver=new IntersectionObserver(entries=>entries.forEach(entry=>{
  if(!entry.isIntersecting)return;
  revealObserver.unobserve(entry.target);

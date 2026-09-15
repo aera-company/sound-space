@@ -1,42 +1,76 @@
 ---
 import { Image } from 'astro:assets';
+import ListeningRoom from './ListeningRoom.astro';
 import warm from '../assets/warm.jpg';
-import ExperimentOverview from './ExperimentOverview.astro';
-import meter from '../assets/meter.jpg';
-import poster from '../assets/video-poster.jpg';
+import cool from '../assets/cool.jpg';
+import neutral from '../assets/video-poster.jpg';
+import gallery01 from '../assets/gallery-01.jpg';
+import gallery02 from '../assets/gallery-02.jpg';
+import gallery03 from '../assets/gallery-03.jpg';
+import gallery04 from '../assets/gallery-04.jpg';
+import gallery05 from '../assets/gallery-05.jpg';
+import gallery06 from '../assets/gallery-06.jpg';
 const conditions=[
- {id:'B',light:'warm',tempo:'slow',bpm:68,date:'Tuesday, 18 August',n:25},
  {id:'A',light:'warm',tempo:'fast',bpm:118,date:'Wednesday, 19 August',n:37},
- {id:'D',light:'cool',tempo:'slow',bpm:68,date:'Thursday, 20 August',n:30},
+ {id:'B',light:'warm',tempo:'slow',bpm:68,date:'Tuesday, 18 August',n:25},
  {id:'C',light:'cool',tempo:'fast',bpm:118,date:'Friday, 21 August',n:36},
+ {id:'D',light:'cool',tempo:'slow',bpm:68,date:'Thursday, 20 August',n:30},
+];
+const gallery=[
+ {src:gallery01,alt:'Warm-lit display wall inside The Hanger UCL Store'},
+ {src:gallery02,alt:'Wide view of The Hanger UCL Store and its display fixtures'},
+ {src:gallery03,alt:'Store aisle with merchandise displays under neutral light'},
+ {src:gallery04,alt:'Customers and merchandise inside The Hanger UCL Store'},
+ {src:gallery05,alt:'Purple UCL merchandise displayed in the store'},
+ {src:gallery06,alt:'Lux and sound level meters used during the field study'},
 ];
 ---
-<section id="experiment" class="experiment wrap" aria-labelledby="experiment-heading">
- <div class="section-line light-line"><span>The experiment</span><span>Soundscape × lighting</span></div>
- <div class="experiment-grid"><div><h2 id="experiment-heading">A different tempo.<br />A different light.<br />The same space.</h2><p>How do sound and light shape the way we experience a store? This exploratory UCL study brings the two together in a real retail environment.</p><p>Each musical tempo is paired with warm and cool lighting, creating four conditions. The study explores comfort, mood, movement and time spent in the space.</p></div>
- <ExperimentOverview /></div>
- <div class="conditions-scene">
-  <Image class="conditions-backdrop" src={warm} alt="" widths={[800,1400,2000]} sizes="(max-width:760px) 100vw, 92vw" width={2000} height={1333} loading="lazy" />
-  <div class="conditions-scene-content">
-   <div class="conditions-heading"><p>UCL Store experiment</p><h3>Explore the experimental conditions</h3><p>Select a condition to hear the combination of lighting and music used in the study.</p></div>
-   <div class="experiment-gallery">{conditions.map(c=><button class="experiment-card" data-combination={c.bpm} data-light={c.light} data-condition={c.id} aria-pressed="false" aria-label={`Play 30-second excerpt: ${c.light} light + ${c.bpm} BPM`}>
-    <span class="condition-card-label">Condition {c.id}</span>
-    <strong>{c.light === 'warm'?'Warm':'Cool'} + {c.tempo}</strong>
-    <span class="condition-card-meta"><span>{c.bpm} BPM</span><span>n = {c.n}</span></span>
-    <span class="sample-action" aria-hidden="true"><span class="sample-icon"><svg class="sample-play" viewBox="0 0 20 20" width="16" height="16"><path d="M5 3v14l12-7Z" fill="currentColor" /></svg><svg class="sample-stop" viewBox="0 0 20 20" width="16" height="16"><path d="M4 4h12v12H4Z" fill="currentColor" /></svg></span><span class="sample-text">Listen · 30 sec</span></span>
-    <span class="sample-progress" aria-hidden="true"></span>
-   </button>)}</div>
-   <div class="condition-scene-footer"><div class="sample-transport"><p id="matrix-status" role="status">Choose a condition to listen. The excerpt uses the same player above.</p><button id="sample-stop" hidden>Stop excerpt</button></div><span>Sound / light / people / space</span></div>
-  </div>
- </div>
- <p class="matrix-note">Photographs document the lighting conditions. Screen colour does not reproduce calibrated lighting.</p>
-</section>
-<section class="place wrap" aria-labelledby="place-heading">
- <div class="place-caption"><p class="eyebrow">The setting</p><h2 id="place-heading">One space.<br />A changing light.</h2><p>Watch the store move between neutral, warm and cool light. The silent film keeps the focus on colour temperature while you listen.</p></div>
- <figure class="lighting-film"><div class="film-stage"><video id="lighting-video" muted playsinline loop controls preload="none" poster={poster.src} width="1024" height="576" aria-label="Silent video of lighting changes in the UCL Store"><source src="/video/lighting.mp4" type="video/mp4" /><track kind="captions" src="/video/lighting.vtt" srclang="en" label="Lighting conditions" /><p>Your browser cannot play the video. <a href="/video/lighting.mp4">Open the silent film</a>.</p></video><div class="film-label" data-light="neutral"><i aria-hidden="true"></i><span id="video-light-label">Neutral light</span></div></div><figcaption><span>Light in transition · The Hanger, UCL Store</span><span>Silent film · 0:54</span></figcaption></figure>
- <p id="video-status" class="video-status" role="status">The film plays silently when in view. Use the video controls to pause or seek.</p>
-</section>
-<section id="methodology" class="methodology wrap" aria-labelledby="method-heading"><div class="section-line light-line"><span>Research notes</span><span>UCL / IEDE / 2026</span></div><div class="method-grid"><div class="method-intro"><h2 id="method-heading">Listening is <br />the starting point.</h2><figure class="measurement-photo"><Image src={meter} alt="A lux meter and sound level meter used to document the store environment" widths={[400,700]} sizes="(max-width:760px) 100vw, 35vw" width={700} height={933} loading="lazy" /><figcaption>In the field: documenting illuminance and sound level alongside the listening conditions.</figcaption></figure></div><div><details open><summary>Study methodology <span aria-hidden="true">+</span></summary><p>A mixed-methods pilot combining direct observation, short customer surveys, staff feedback and environmental measurements. The factorial design crosses music tempo with lighting colour temperature.</p><p>Observation focuses on dwell time and movement. Questionnaires explore perceived comfort, mood, engagement and spatial experience. Sound pressure and illuminance are measured in the store.</p><p>The overview reports respondent counts for each condition. This page presents the stimuli and study setting, not findings about their effects. Descriptions of musical mood refer to the intended character of the recordings.</p></details><details id="analysis-method"><summary>How to read the audio <span aria-hidden="true">+</span></summary><p>Waveform: RMS amplitude of a mono downmix in 5-second windows. Spectrogram and file-average frequency profile: Hann-window FFT (2,048 samples), analysed at 24 kHz, displayed from 30 Hz to 12 kHz. File average shows mean spectral power across the whole recording. Both recordings share the same plotting scales.</p><p>Loudness: EBU R128 analysis of the supplied X3 stereo files. Integrated loudness is shown in LUFS, loudness range in LU and true peak in dBTP. The loudness curve shows 3-second short-term readings averaged in 5-second windows.</p><p>The recordings are played at their original speed, without loudness normalisation. The BPM labels identify the supplied conditions; they are not an automatic tempo estimate. Digital loudness does not measure the store’s sound pressure level.</p><p>Live spectrum uses Web Audio FFT with a Blackman window, at the browser’s audio sample rate, from 20 Hz to 20 kHz (or Nyquist). Resolution selects the FFT size; Response controls smoothing. The display updates about 30 times per second during playback, less often with reduced motion. Peak hold decays at 8 dB per second. Freeze holds the visual while audio continues. The analyser sits before playback volume. Live and file-average spectra use different windows and aggregation, so their values are not directly interchangeable.</p><p>File visualisations use <a href="https://d3js.org/" target="_blank" rel="noopener noreferrer">D3</a>. The playhead follows the audio position. The spectrogram uses a shared black–violet–red–yellow scale.</p></details><details><summary>Research & credits <span aria-hidden="true">+</span></summary><p><strong>Module</strong><br />BENV0008 25/26</p><p><strong>Supervisors</strong><br />Dr Francesco Aletta<br />Dr Gemma Moore</p><p>MSc Health, Wellbeing and Sustainable Buildings<br />UCL Institute for Environmental Design and Engineering</p><p>Research title: “The Influence of Soundscape and Lighting on Customer Behaviour and Spatial Experience in Retail Environments”.</p><p>Audio: the supplied <em>bruna-tracks68bpmX3</em> and <em>bruna-118bpmX3</em> recordings. Research context: June and August 2026 project presentations. Photographs, experiment overview and lighting video supplied by the project.</p></details></div></div></section>
-<footer class="footer wrap"><a class="footer-title" href="#listen">Return to listening <span aria-hidden="true">↗</span></a><div><span>BENV0008 25/26 <strong>WHBQ3</strong></span><span>UCL · MSc dissertation · 2026</span><a href="#">Back to top ↑</a></div></footer>
 
-<script>import '../scripts/experiment.ts';</script>
+<section id="explore" class="explore-room wrap" aria-labelledby="explore-heading">
+  <div class="section-line light-line"><span>02 · Explore room</span><span>Four sensory conditions</span></div>
+  <div class="explore-heading"><div><p class="eyebrow">UCL Store experiment</p><h2 id="explore-heading">Explore the room.</h2></div><p>Select a condition to change the lighting context and hear a 30-second excerpt of its musical tempo.</p></div>
+  <div class="explore-stage" data-room-light="warm">
+    <div class="room-media" aria-live="polite">
+      <Image class="room-photo room-photo-warm" src={warm} alt="The UCL Store under warm lighting" widths={[800,1400,2000]} sizes="(max-width:760px) 100vw, 92vw" width={2000} height={1333} loading="lazy" />
+      <Image class="room-photo room-photo-cool" src={cool} alt="The UCL Store under cool lighting" widths={[800,1400,2000]} sizes="(max-width:760px) 100vw, 92vw" width={2000} height={1333} loading="lazy" />
+      <div class="room-light-label"><i aria-hidden="true"></i><span data-room-label>Warm light</span></div>
+    </div>
+    <div class="room-conditions" role="group" aria-label="Experimental conditions">
+      {conditions.map(c=><button class="room-condition" data-combination={c.bpm} data-light={c.light} data-condition={c.id} aria-pressed="false" aria-label={`Play 30-second excerpt: Condition ${c.id}, ${c.light} light + ${c.bpm} BPM`}>
+        <span class="condition-index">Condition {c.id}</span><strong>{c.light === 'warm'?'Warm':'Cool'} + {c.tempo}</strong>
+        <span class="condition-card-meta"><span>{c.bpm} BPM</span><span>n = {c.n}</span></span><span class="condition-date">{c.date}</span>
+        <span class="sample-action" aria-hidden="true"><span class="sample-icon"><svg class="sample-play" viewBox="0 0 20 20" width="14" height="14"><path d="M5 3v14l12-7Z" fill="currentColor" /></svg><svg class="sample-stop" viewBox="0 0 20 20" width="14" height="14"><path d="M4 4h12v12H4Z" fill="currentColor" /></svg></span><span class="sample-text">Listen · 30 sec</span></span><span class="sample-progress" aria-hidden="true"></span>
+      </button>)}
+    </div>
+  </div>
+  <div class="room-status"><p id="matrix-status" role="status">Choose a condition to change the room and hear its soundtrack.</p><button id="sample-stop" hidden>Stop excerpt</button><span>Sound / light / people / space</span></div>
+  <p class="matrix-note">Field photographs document the lighting conditions. Screen colour does not reproduce calibrated lighting.</p>
+</section>
+
+<section id="light" class="light-study wrap" aria-labelledby="light-heading">
+  <div class="section-line light-line"><span>03 · Light study</span><span>Warm / neutral / cool</span></div>
+  <div class="light-study-heading"><h2 id="light-heading">A different tempo.<br />A different light.<br />The same space.</h2><p>The store shifts in atmosphere while its architecture stays constant. Three field views hold that change side by side.</p></div>
+  <div class="light-triptych">
+    <figure><div><Image src={warm} alt="The store under warm light" widths={[480,800]} sizes="(max-width:760px) 86vw, 31vw" width={1200} height={800} loading="lazy" /></div><figcaption><span>01</span><strong>Warm</strong><small>Lower colour temperature</small></figcaption></figure>
+    <figure><div><Image src={neutral} alt="The store under neutral light" widths={[480,800]} sizes="(max-width:760px) 86vw, 31vw" width={1024} height={576} loading="lazy" /></div><figcaption><span>02</span><strong>Neutral</strong><small>Reference condition</small></figcaption></figure>
+    <figure><div><Image src={cool} alt="The store under cool light" widths={[480,800]} sizes="(max-width:760px) 86vw, 31vw" width={1200} height={800} loading="lazy" /></div><figcaption><span>03</span><strong>Cool</strong><small>Higher colour temperature</small></figcaption></figure>
+  </div>
+</section>
+
+<ListeningRoom />
+
+<section id="gallery" class="project-gallery" aria-labelledby="gallery-heading">
+  <div class="wrap"><div class="section-line light-line"><span>Project notes</span><span>Field documentation</span></div><div class="gallery-heading"><div><p class="eyebrow">Inside the study</p><h2 id="gallery-heading">Project in view.</h2></div><p>Six details from the UCL Store, including the space, its lighting and the environmental measurements.</p></div></div>
+  <div class="gallery-shell">
+    <div class="gallery-viewport" data-gallery tabindex="0" aria-label="Project photo gallery">
+      {gallery.map((item,i)=><figure class="gallery-slide" data-gallery-slide aria-label={`Photo ${i+1} of ${gallery.length}`}><Image src={item.src} alt={item.alt} widths={[640,1000,1600,2200]} sizes="(max-width:760px) 88vw, 78vw" loading="lazy" /><figcaption><span>{String(i+1).padStart(2,'0')} / {String(gallery.length).padStart(2,'0')}</span><span>Field documentation · The Hanger</span></figcaption></figure>)}
+    </div>
+    <div class="gallery-controls wrap"><div class="gallery-buttons"><button type="button" data-gallery-prev aria-label="Previous photograph">←</button><button type="button" data-gallery-next aria-label="Next photograph">→</button></div><div class="gallery-dots" role="group" aria-label="Choose photograph">{gallery.map((_,i)=><button type="button" data-gallery-dot={i} aria-label={`Show photograph ${i+1}`} aria-pressed={i===0?'true':'false'}></button>)}</div><p class="gallery-status" aria-live="polite">Photograph <span data-gallery-current>1</span> of {gallery.length}</p></div>
+  </div>
+</section>
+
+<footer class="footer wrap" id="credits">
+  <a class="footer-title" href="#listen">Return to listening <span aria-hidden="true">↗</span></a>
+  <div class="footer-credits"><p><strong>Research &amp; credits</strong><span>Module BENV0008 · Dissertation 25/26 · Student WHBQ3</span></p><p><strong>Supervisors</strong><span>Dr. Prof. Francesco Aletta<br />Dr. Prof. Gemma Moore</span></p><p><strong>Programme</strong><span>MSc Health, Wellbeing and Sustainable Buildings<br />UCL Institute for Environmental Design &amp; Engineering</span></p></div>
+  <div class="footer-meta"><span>BENV0008 25/26 <strong>WHBQ3</strong></span><span>UCL · MSc dissertation · 2026</span><a href="#top">Back to top ↑</a></div>
+</footer>

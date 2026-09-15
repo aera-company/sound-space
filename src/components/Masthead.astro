@@ -2,8 +2,13 @@
 import { Image } from 'astro:assets';
 import ucl from '../assets/ucl-logo-primary.svg';
 ---
+
 <header class="masthead wrap">
-  <a class="wordmark" href="#"><span class="mark" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span>BENV0008<span class="edition">Dissertation 25/26</span></a>
-  <nav aria-label="Main navigation"><a href="#listen">Listen</a><a href="#experiment">The experiment</a><a href="#methodology">Methodology</a></nav>
+  <a class="student-mark" href="#top" aria-label="BENV0008 project home">
+    <span class="mark" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span>
+    <span><small>Student</small><strong>WHBQ3</strong></span>
+  </a>
+  <p class="module-mark"><strong>Module BENV0008</strong><span>Dissertation 25/26</span></p>
+  <nav aria-label="Main navigation"><a href="#explore">Explore room</a><a href="#light">Light</a><a href="#listen">Listen</a><a href="#gallery">Gallery</a></nav>
   <Image src={ucl} alt="UCL" width={1394} height={391} class="ucl-mark" />
 </header>
