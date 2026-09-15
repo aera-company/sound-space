@@ -9,7 +9,7 @@ const assert=require('node:assert/strict');const fs=require('node:fs');
    const errors=[],requests=[];page.on('pageerror',e=>errors.push(e.message));page.on('request',r=>requests.push(r.url()));
    await page.goto('http://127.0.0.1:4322/',{waitUntil:'networkidle'});
    assert.equal(requests.some(r=>r.endsWith('.mp3')),false);
-   assert.equal(await page.locator('.cover-image img').evaluate(i=>i.complete&&i.naturalWidth>0),true);
+   assert.equal(await page.locator('.hero-photo img').evaluate(i=>i.complete&&i.naturalWidth>0),true);
    assert.equal(await page.locator('#tab-frequencies').getAttribute('aria-selected'),'true');
    assert.equal(await page.locator('.experiment-card').count(),4);
    assert.equal(await page.locator('.place-photos').count(),0);

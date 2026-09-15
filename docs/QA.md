@@ -75,6 +75,7 @@ The full analyzer regression (verify-unified.cjs) also passed in Chromium and We
 
 - Replaced the promotional hero language with the research title, pilot-study subtitle, Module BENV0008, Dissertation 25/26, student code WHBQ3, programme, institute and supervisor information from the supplied project cover.
 - Reframed the store image as a documented study setting within an academic-cover composition. Page title and description now use the research subject.
+- Restored the original wide hero treatment and extended its white vertical overlay so the academic title remains legible while more of the store stays visible. Added WHBQ3 beside BENV0008 25/26 in the page footer.
 - Replaced the repeated photographic cards with one immersive store scene and four accessible condition controls. The supplied UCL palette distinguishes the controls while retaining the actual B/A/D/C labels, BPMs and respondent counts.
 - Existing audio semantics are unchanged: each condition plays 0:30–1:00 through the shared player, exposes its pressed state and visual progress, stops exclusively and restores focus after the separate stop action.
 - Astro production build passed. `scripts/verify-media.cjs` passed in Chromium desktop and WebKit mobile after the structural change. Screenshots were reviewed at 1440 × 1100 and 390 × 844, with no horizontal overflow.
