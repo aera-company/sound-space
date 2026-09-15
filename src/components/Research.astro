@@ -2,7 +2,7 @@
 import { Image } from 'astro:assets';
 import warm from '../assets/warm.jpg';
 import cool from '../assets/cool.jpg';
-import overview from '../assets/experiment-overview.jpg';
+import ExperimentOverview from './ExperimentOverview.astro';
 import meter from '../assets/meter.jpg';
 import poster from '../assets/video-poster.jpg';
 const conditions=[
@@ -15,10 +15,10 @@ const conditions=[
 <section id="experiment" class="experiment wrap" aria-labelledby="experiment-heading">
  <div class="section-line light-line"><span>The experiment</span><span>Soundscape × lighting</span></div>
  <div class="experiment-grid"><div><h2 id="experiment-heading">A different tempo.<br />A different light.<br />The same space.</h2><p>How do sound and light shape the way we experience a store? This exploratory UCL study brings the two together in a real retail environment.</p><p>Each musical tempo is paired with warm and cool lighting, creating four conditions. The study explores comfort, mood, movement and time spent in the space.</p></div>
- <figure class="experiment-overview"><Image src={overview} alt="Experimental overview: warm and slow, 25 respondents on 18 August; warm and fast, 37 on 19 August; cool and slow, 30 on 20 August; cool and fast, 36 on 21 August." width={682} height={384} loading="lazy" /><figcaption>Respondents per combined condition · supplied experiment overview</figcaption></figure></div>
+ <ExperimentOverview /></div>
  <div class="conditions-heading"><h3>Four sensory conditions</h3><p>Select a photograph to hear a 30-second excerpt in its lighting context.</p></div>
  <div class="experiment-gallery">{conditions.map(c=><button class="experiment-card" data-combination={c.bpm} data-light={c.light} data-condition={c.id} aria-pressed="false" aria-label={`Play 30-second excerpt: ${c.light} light + ${c.bpm} BPM`}>
-  <span class="experiment-image"><Image src={c.image} alt={`The store display under ${c.light} lighting`} widths={[480,800,1200]} sizes="(max-width:760px) 100vw, 50vw" width={1200} height={800} loading="lazy" /><span class="experiment-photo-label">{c.light} light</span><span class="sample-action" aria-hidden="true"><span class="sample-icon">▶</span><span class="sample-text">Listen · 30 sec</span></span></span>
+  <span class="experiment-image"><Image src={c.image} alt={`The store display under ${c.light} lighting`} widths={[480,800,1200]} sizes="(max-width:760px) 100vw, 50vw" width={1200} height={800} loading="lazy" /><span class="experiment-photo-label">{c.light} light</span><span class="sample-action" aria-hidden="true"><span class="sample-icon"><svg class="sample-play" viewBox="0 0 20 20" width="16" height="16"><path d="M5 3v14l12-7Z" fill="currentColor" /></svg><svg class="sample-stop" viewBox="0 0 20 20" width="16" height="16"><path d="M4 4h12v12H4Z" fill="currentColor" /></svg></span><span class="sample-text">Listen · 30 sec</span></span><span class="sample-progress" aria-hidden="true"></span></span>
   <span class="experiment-card-info"><span><strong>{c.light === 'warm'?'Warm':'Cool'} + {c.tempo}</strong><small>Condition {c.id} · {c.bpm} BPM</small></span><span class="experiment-date">{c.date}<small>n = {c.n}</small></span></span>
  </button>)}</div>
  <div class="sample-transport"><p id="matrix-status" role="status">Choose a photograph to listen. The excerpt uses the same player above.</p><button id="sample-stop" hidden>Stop excerpt</button></div>

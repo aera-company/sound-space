@@ -1,0 +1,32 @@
+[
+  {
+    "browser": "chromium-desktop",
+    "base": "http://127.0.0.1:4322",
+    "renderedVideo": true,
+    "pauseReplay": true,
+    "offscreenPause": true,
+    "keyboardPause": true,
+    "vectorPoster": true,
+    "accessibleData": true,
+    "reducedMotion": true,
+    "photoProgress": true,
+    "focusReturn": true,
+    "responsive": true,
+    "errors": []
+  },
+  {
+    "browser": "webkit-mobile",
+    "base": "http://127.0.0.1:4322",
+    "renderedVideo": true,
+    "pauseReplay": true,
+    "offscreenPause": true,
+    "keyboardPause": true,
+    "vectorPoster": true,
+    "accessibleData": true,
+    "reducedMotion": true,
+    "photoProgress": true,
+    "focusReturn": true,
+    "responsive": true,
+    "errors": []
+  }
+]

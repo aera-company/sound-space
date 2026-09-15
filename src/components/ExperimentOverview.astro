@@ -1,0 +1,13 @@
+---
+const rows=[['Warm + slow','68 BPM','Tuesday, 18 August',25],['Warm + fast','118 BPM','Wednesday, 19 August',37],['Cool + slow','68 BPM','Thursday, 20 August',30],['Cool + fast','118 BPM','Friday, 21 August',36]];
+---
+<figure class="experiment-overview" aria-labelledby="overview-title">
+ <div class="overview-heading"><h3 id="overview-title">Experimental overview</h3><span>2 × 2</span></div>
+ <div class="overview-stage">
+  <img class="overview-poster" src="/analysis/experiment-overview.svg" width="1280" height="1120" alt="Four lighting and music conditions: warm and slow, 25 respondents; warm and fast, 37; cool and slow, 30; cool and fast, 36." loading="lazy" />
+  <video id="overview-video" data-src="/video/overview.mp4" muted playsinline preload="none" width="1920" height="1680" aria-hidden="true" tabindex="-1"></video>
+ </div>
+ <figcaption class="overview-caption"><span>128 respondents · August 2026</span><button id="overview-toggle" aria-controls="overview-video" hidden><svg viewBox="0 0 20 20" width="16" height="16" aria-hidden="true"><path d="M5 4v12l10-6Z" fill="currentColor"/></svg><span>Play overview</span></button></figcaption>
+ <details class="overview-data"><summary>View the data <span aria-hidden="true">+</span></summary><table><caption class="sr-only">Respondents by experimental condition</caption><thead><tr><th scope="col">Condition</th><th scope="col">Date</th><th scope="col">n</th></tr></thead><tbody>{rows.map(([condition,bpm,date,n])=><tr><th scope="row">{condition}<small>{bpm}</small></th><td>{date}</td><td>{n}</td></tr>)}</tbody></table></details>
+</figure>
+<script>import '../scripts/overview.ts';</script>

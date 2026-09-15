@@ -119,7 +119,7 @@ function stopPreview(pause=false){
  const current=preview;if(!current)return;preview=undefined;
  current.button.classList.remove('is-previewing');current.button.setAttribute('aria-pressed','false');
  current.button.setAttribute('aria-label',`Play 30-second excerpt: ${current.button.dataset.light} light + ${current.bpm} BPM`);
- current.button.querySelector('.sample-icon')!.textContent='▶';current.button.querySelector('.sample-text')!.textContent='Listen · 30 sec';
+ current.button.style.removeProperty('--sample-progress');current.button.querySelector('.sample-text')!.textContent='Listen · 30 sec';
  $('#sample-stop').hidden=true;$('#matrix-status').textContent='Excerpt stopped. Choose a photograph to listen again.';
  if(pause){++request;audios.get(current.bpm)!.pause();}
 }
@@ -127,9 +127,10 @@ function updatePreview(){
  if(!preview)return;
  const {button,bpm,start,end}=preview,audio=audios.get(bpm)!;
  if(audio.currentTime>=end){stopPreview(true);$('#matrix-status').textContent='Excerpt complete. Choose another condition or continue in the listening room.';return;}
+ button.style.setProperty('--sample-progress',String(Math.max(0,Math.min(1,(audio.currentTime-start)/(end-start)))));
  button.querySelector('.sample-text')!.textContent=`${formatTime(Math.max(0,audio.currentTime-start))} / 0:30 · Stop`;
 }
-$('#sample-stop').addEventListener('click',()=>stopPreview(true));
+$('#sample-stop').addEventListener('click',()=>{const button=preview?.button;stopPreview(true);button?.focus({preventScroll:true});});
 document.querySelectorAll<HTMLElement>('[data-combination]').forEach(button=>button.addEventListener('click',()=>{
  if(preview?.button===button){stopPreview(true);return;}
  stopPreview(true);
@@ -140,16 +141,16 @@ document.querySelectorAll<HTMLElement>('[data-combination]').forEach(button=>but
  preview={button,bpm,start:30,end:60};
  button.classList.add('is-previewing');button.setAttribute('aria-pressed','true');
  button.setAttribute('aria-label',`Stop excerpt: ${button.dataset.light} light + ${bpm} BPM`);
- button.querySelector('.sample-icon')!.textContent='■';
+ button.style.setProperty('--sample-progress','0');
  $('#sample-stop').hidden=false;
  $('#matrix-status').textContent=`${button.dataset.light==='warm'?'Warm':'Cool'} light + ${bpm} BPM · playing a 30-second excerpt.`;
  seekTo(bpm,30);play(bpm);
 }));
 const tabs=Array.from(document.querySelectorAll<HTMLButtonElement>('[data-view]'));
-function setView(tab:HTMLButtonElement){view=tab.dataset.view!;tabs.forEach(b=>{b.setAttribute('aria-selected',String(b===tab));b.tabIndex=b===tab?0:-1;});$('#chart-panel').setAttribute('aria-labelledby',tab.id);render();}
+function setView(tab:HTMLButtonElement,motion=true){view=tab.dataset.view!;tabs.forEach(b=>{b.setAttribute('aria-selected',String(b===tab));b.tabIndex=b===tab?0:-1;});$('#chart-panel').setAttribute('aria-labelledby',tab.id);render();if(motion&&!reduced.matches)$('#chart-panel').animate([{opacity:.55},{opacity:1}],{duration:180,easing:'cubic-bezier(0.23,1,0.32,1)'});}
 tabs.forEach((tab,index)=>{
  tab.addEventListener('click',()=>setView(tab));
- tab.addEventListener('keydown',e=>{let next=index;if(e.key==='ArrowRight')next=(index+1)%tabs.length;else if(e.key==='ArrowLeft')next=(index+tabs.length-1)%tabs.length;else if(e.key==='Home')next=0;else if(e.key==='End')next=tabs.length-1;else return;e.preventDefault();tabs[next].focus();setView(tabs[next]);});
+ tab.addEventListener('keydown',e=>{let next=index;if(e.key==='ArrowRight')next=(index+1)%tabs.length;else if(e.key==='ArrowLeft')next=(index+tabs.length-1)%tabs.length;else if(e.key==='Home')next=0;else if(e.key==='End')next=tabs.length-1;else return;e.preventDefault();tabs[next].focus();setView(tabs[next],false);});
 });
 document.querySelectorAll<HTMLElement>('[data-spectrum-mode]').forEach(b=>b.addEventListener('click',()=>{spectrumMode=b.dataset.spectrumMode!;document.querySelectorAll<HTMLElement>('[data-spectrum-mode]').forEach(other=>other.setAttribute('aria-pressed',String(other===b)));render();}));
 $('#spectrum-resolution').addEventListener('change',e=>liveSpectrum.resolution(Number((e.target as HTMLSelectElement).value)));

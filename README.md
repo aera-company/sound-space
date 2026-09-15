@@ -25,7 +25,7 @@ npm run build
 npm run preview
 ```
 
-O build estático é gerado em `dist/`. Não foi publicado nesta etapa.
+O build estático é gerado em `dist/`. O site publicado é https://sound-space-one.vercel.app, com deploy a partir de `main`.
 
 ## Conteúdo
 
@@ -83,3 +83,9 @@ Cada foto de condição toca o intervalo 0:30–1:00 da faixa X3 correspondente,
 O vídeo de 53,9 s foi remuxado sem áudio, sem recompressão visual, com faststart. Legendas de luz em experiment.ts e lighting.vtt foram alinhadas por inspeção do filme (aproximadamente 0,1 s); são descrições visuais, não medidas de CCT. Ele toca mudo, inline, quando visível; pausa fora de tela e permite pausa/busca manual. Com reduced motion, aguarda play.
 
 Verificação desta revisão: scripts/verify-media.cjs (desktop e WebKit mobile, resultados em docs/media-results.json) e scripts/verify-unified.cjs para os controles completos do analisador.
+
+## Overview em Remotion
+
+A imagem de baixa resolução foi recriada como arte vetorial a partir dos mesmos quatro grupos, datas e números de respondentes. A composição em `motion/overview` gera um MP4 de 8 segundos (1920 × 1680, 30 fps) e o SVG estático, ambos a partir do mesmo componente React. Consulte o README desse diretório para regenerar. A página não carrega React ou Remotion: usa vídeo nativo e SVG.
+
+O overview destaca cada condição uma vez ao entrar em tela, permite pausa e replay e respeita reduced motion. Uma tabela HTML oferece os mesmos dados. As fotos mostram progresso real do trecho; navegação, seletores e aberturas têm transições discretas, com foco por teclado preservado.
