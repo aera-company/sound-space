@@ -218,15 +218,15 @@ body,button,input,select,textarea{font-family:var(--sans)}
   margin-inline:auto;
   grid-template-columns:minmax(0,1.85fr) minmax(290px,1fr);
 }
-.room-media{height:auto;aspect-ratio:2679/2944;background:#f2eef5}
+.room-media{height:auto;aspect-ratio:1568/1515;background:#f2eef5}
 .room-photo{object-fit:contain;object-position:center bottom}
 @media(max-width:900px){
   .explore-stage{grid-template-columns:minmax(0,1.55fr) minmax(255px,.85fr)}
-  .room-media{height:auto;aspect-ratio:2679/2944}
+  .room-media{height:auto;aspect-ratio:1568/1515}
 }
 @media(max-width:760px){
   .explore-stage{width:100%}
-  .room-media{height:auto;aspect-ratio:2679/2944}
+  .room-media{height:auto;aspect-ratio:1568/1515}
 }
 
 /* Unify the condition cards as one compact control rail. */

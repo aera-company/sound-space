@@ -1,8 +1,6 @@
 ---
 import { Image } from 'astro:assets';
 import ListeningRoom from './ListeningRoom.astro';
-import warm from '../assets/warm2.jpg';
-import cool from '../assets/cool2.jpg';
 import lightWarm from '../assets/light-01-warm.jpg';
 import lightBaseline from '../assets/light-02-baseline.jpg';
 import lightCool from '../assets/light-03-cool.jpg';
@@ -43,8 +41,8 @@ const gallery=[
   <div class="explore-heading"><div><p class="eyebrow">UCL Store experiment</p><h2 id="explore-heading">Explore the experimental conditions</h2></div><p>Select a condition to change the lighting context and hear a 30-second excerpt of its musical tempo.</p></div>
   <div class="explore-stage" data-room-light="warm">
     <div class="room-media" aria-live="polite">
-      <Image class="room-photo room-photo-warm" src={warm} alt="The UCL Store under warm lighting" widths={[600,1000,1600,2000]} sizes="(max-width:760px) 100vw, 680px" width={2679} height={2944} loading="lazy" />
-      <Image class="room-photo room-photo-cool" src={cool} alt="The UCL Store under cool lighting" widths={[600,1000,1600,2000]} sizes="(max-width:760px) 100vw, 680px" width={2679} height={2944} loading="lazy" />
+      <Image class="room-photo room-photo-warm" src={lightWarm} alt="The UCL Store under warm lighting" widths={[600,1000,1568]} sizes="(max-width:760px) 100vw, 680px" width={1568} height={1515} loading="lazy" />
+      <Image class="room-photo room-photo-cool" src={lightCool} alt="The UCL Store under cool lighting" widths={[600,1000,1568]} sizes="(max-width:760px) 100vw, 680px" width={1568} height={1515} loading="lazy" />
       <div class="room-light-label"><i aria-hidden="true"></i><span data-room-label>Warm light</span></div>
     </div>
     <div class="room-conditions" role="group" aria-label="Experimental conditions">
