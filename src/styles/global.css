@@ -228,3 +228,40 @@ body,button,input,select,textarea{font-family:var(--sans)}
   .explore-stage{width:100%}
   .room-media{height:auto;aspect-ratio:2679/2944}
 }
+
+/* Unify the condition cards as one compact control rail. */
+.room-conditions{background:#fff;border-left:1px solid #ded4e8}
+.room-condition,
+.room-condition:nth-child(even){
+  --condition-accent:#c88436;
+  justify-content:center;
+  gap:0;
+  background:#fff;
+  padding:16px 22px 16px 25px;
+}
+.room-condition:nth-child(n+3){--condition-accent:#79b9dc}
+.room-condition::before{
+  content:"";
+  position:absolute;
+  left:0;
+  top:16px;
+  bottom:16px;
+  width:2px;
+  background:var(--condition-accent);
+  opacity:.75;
+}
+.room-condition:hover,
+.room-condition:nth-child(even):hover{background:#f7f2fb}
+.room-condition.is-previewing,
+.room-condition.is-previewing:nth-child(even),
+.room-condition.is-previewing:nth-child(even):hover{background:var(--ink)}
+.room-condition .condition-index{font-size:9px}
+.room-condition>strong{margin-top:7px}
+.room-condition .condition-card-meta{margin-top:5px}
+.room-condition .sample-action{min-height:0;margin-top:10px;padding-top:0}
+@media(max-width:760px){
+  .room-conditions{border-left:0;border-top:1px solid #ded4e8}
+  .room-condition{justify-content:flex-start;padding:15px 16px 14px 19px}
+  .room-condition::before{top:14px;bottom:14px}
+  .room-condition .sample-action{margin-top:9px}
+}
