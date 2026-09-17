@@ -127,7 +127,14 @@ h1,h2,h3,.footer-title,.room-condition>strong,.light-triptych figcaption strong{
   margin-inline:auto;
 }
 @media(max-width:760px){
-  .project-cover .cover-title h1{font-size:clamp(25px,6.7vw,32px);max-width:17ch}
+  .project-cover .cover-body{top:137px}
+  .project-cover .cover-title h1{
+    width:100%;
+    max-width:none;
+    font-size:clamp(25px,6.7vw,32px);
+    line-height:1.02;
+    text-wrap:balance;
+  }
   .analysis-header h2{font-size:48px}
   .gallery-slide img{height:clamp(240px,38.4vh,416px);max-width:82vw}
   .gallery-dots{gap:2px}

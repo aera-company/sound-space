@@ -59,8 +59,19 @@ const assert = require('node:assert/strict');
   await mobile.goto(siteUrl,{waitUntil:'networkidle'});
   assert.equal(await mobile.locator('.room-condition').count(),4);
   assert.equal(await mobile.locator('.gallery-slide').count(),11);
+  const mobileHeroTitle=await mobile.locator('#page-title').evaluate(el=>{const style=getComputedStyle(el);return{lines:Math.round(el.getBoundingClientRect().height/parseFloat(style.lineHeight)),usesAvailableWidth:el.getBoundingClientRect().width>=el.parentElement.getBoundingClientRect().width-1};});
+  assert.equal(mobileHeroTitle.usesAvailableWidth,true,'mobile hero title should use the full text column');
+  assert.equal(mobileHeroTitle.lines<=5,true,'mobile hero title should stay within five balanced lines');
   assert.equal(await mobile.locator('body').evaluate(el=>el.scrollWidth<=innerWidth+1),true,'mobile page should not overflow horizontally');
   await mobile.screenshot({path:'/tmp/sound-space-mobile.png',fullPage:true});
+  for(const width of [375,430]){
+    const responsive=await browser.newPage({viewport:{width,height:900},deviceScaleFactor:1});
+    await responsive.goto(siteUrl,{waitUntil:'networkidle'});
+    const titleLines=await responsive.locator('#page-title').evaluate(el=>Math.round(el.getBoundingClientRect().height/parseFloat(getComputedStyle(el).lineHeight)));
+    assert.equal(titleLines<=5,true,`mobile hero title should stay within five lines at ${width}px`);
+    assert.equal(await responsive.locator('body').evaluate(el=>el.scrollWidth<=innerWidth+1),true,`page should not overflow at ${width}px`);
+    await responsive.close();
+  }
   assert.deepEqual(errors,[]);
   console.log('Redesign verification passed: desktop, interactions, comparison, gallery and mobile.');
   await browser.close();
