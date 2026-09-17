@@ -13,7 +13,7 @@ const assert = require('node:assert/strict');
   assert.match(await page.locator('.hero-photo img').getAttribute('src'),/hero-cover/);
   assert.equal(await page.locator('#page-title').evaluate(el=>parseFloat(getComputedStyle(el).fontSize)<=54),true,'hero title should use the reduced type size');
   assert.equal(await page.locator('#analysis-heading').textContent(),'Soundscape');
-  assert.equal(await page.locator('#light-heading').textContent(),'Lightning');
+  assert.equal(await page.locator('#light-heading').textContent(),'Lighting');
   assert.equal((await page.locator('#film-heading').innerText()).replaceAll('\n',' / '),'A different tempo / A different light / The same space');
   const sectionTitleStyles=await page.locator('#explore-heading,#light-heading,#analysis-heading,#film-heading,#gallery-heading').evaluateAll(nodes=>nodes.map(node=>({size:Math.round(parseFloat(getComputedStyle(node).fontSize)),weight:getComputedStyle(node).fontWeight,family:getComputedStyle(node).fontFamily})));
   assert.equal(new Set(sectionTitleStyles.map(style=>style.size)).size,1,'section titles should share one size');
