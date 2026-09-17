@@ -12,6 +12,14 @@ document.querySelectorAll<HTMLButtonElement>('[data-listening-theme]').forEach(b
   if(listening) listening.dataset.theme=theme;
   document.querySelectorAll<HTMLButtonElement>('[data-listening-theme]').forEach(option=>option.setAttribute('aria-pressed',String(option===button)));
 }));
+const fieldFilm=document.querySelector<HTMLVideoElement>('#field-film');
+if(fieldFilm){
+  const filmObserver=new IntersectionObserver(entries=>{
+    const visible=entries.some(entry=>entry.isIntersecting);
+    if(visible&&!reducedMotion.matches)fieldFilm.play().catch(()=>{});else fieldFilm.pause();
+  },{threshold:.45});
+  filmObserver.observe(fieldFilm);
+}
 const gallery=document.querySelector<HTMLElement>('[data-gallery]');
 if(gallery){
   const slides=Array.from(gallery.querySelectorAll<HTMLElement>('[data-gallery-slide]'));

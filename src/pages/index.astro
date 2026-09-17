@@ -3,7 +3,7 @@ import Layout from "../layouts/Layout.astro";
 import Masthead from "../components/Masthead.astro";
 import Research from "../components/Research.astro";
 import { Image } from "astro:assets";
-import hero from "../assets/hero2.jpg";
+import hero from "../assets/hero-neutral.jpg";
 ---
 
 <Layout title="Soundscape and Lighting in Retail Environments — BENV0008 25/26 · UCL" description="A small-scale pilot study in the UCL Store investigating soundscape, lighting, customer behaviour and spatial experience.">
@@ -11,13 +11,13 @@ import hero from "../assets/hero2.jpg";
   <main id="main">
     <section id="top" class="hero project-cover" aria-labelledby="page-title">
       <Masthead />
-      <div class="hero-photo cover-visual"><Image src={hero} alt="A wide view inside The Hanger UCL Store, the setting for the sound and lighting study" widths={[640,1024,1600,2400]} sizes="100vw" width={4032} height={3024} loading="eager" fetchpriority="high" /></div>
-      <div class="cover-body wrap"><div class="cover-title"><p class="cover-kicker">Module BENV0008 · Dissertation 25/26</p><h1 id="page-title">The Influence of Soundscape and Lighting on Customer Behaviour and Spatial Experience in Retail Environments</h1><p class="cover-subtitle">A small-scale pilot study in the UCL Store — The Hanger</p></div></div>
-      <div class="cover-footer wrap">
+      <div class="hero-photo cover-visual"><Image src={hero} alt="The neutral lighting condition inside The Hanger UCL Store" widths={[640,1024,1600,2400]} sizes="100vw" width={4032} height={3024} loading="eager" fetchpriority="high" /></div>
+      <div class="cover-body wrap"><div class="cover-title"><h1 id="page-title">The Influence of Soundscape and Lighting on Customer Behaviour and Spatial Experience in Retail Environments</h1><p class="cover-subtitle">A small-scale pilot study in the UCL Store — The Hanger</p></div></div>
+      <div class="cover-footer-band"><div class="cover-footer wrap">
         <div class="cover-institution"><strong>University College London</strong><span>UCL Institute for Environmental Design &amp; Engineering</span><span>MSc Health, Wellbeing and Sustainable Buildings</span></div>
+        <div class="cover-module"><strong>Module BENV0008</strong><span>Dissertation 25/26</span></div>
         <dl class="cover-supervisors"><div><dt>1st Supervisor</dt><dd>Dr. Prof. Francesco Aletta</dd></div><div><dt>2nd Supervisor</dt><dd>Dr. Prof. Gemma Moore</dd></div></dl>
-        <a href="#explore" class="cover-entry">Explore the four conditions <span aria-hidden="true">↓</span></a>
-      </div>
+      </div></div>
     </section>
     <Research />
   </main>

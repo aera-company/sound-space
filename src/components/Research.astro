@@ -1,18 +1,18 @@
 ---
 import { Image } from 'astro:assets';
 import ListeningRoom from './ListeningRoom.astro';
-import warm from '../assets/warm.jpg';
-import cool from '../assets/cool.jpg';
-import neutral from '../assets/video-poster.jpg';
+import warm from '../assets/warm2.jpg';
+import cool from '../assets/cool2.jpg';
+import neutral from '../assets/neutral2.jpg';
 import gallery01 from '../assets/gallery-01.jpg';
 import gallery02 from '../assets/gallery-02.jpg';
 import gallery04 from '../assets/gallery-04.jpg';
 import gallery06 from '../assets/gallery-06.jpg';
 const conditions=[
- {id:'A',light:'warm',tempo:'fast',bpm:118,date:'Wednesday, 19 August',n:37},
- {id:'B',light:'warm',tempo:'slow',bpm:68,date:'Tuesday, 18 August',n:25},
- {id:'C',light:'cool',tempo:'fast',bpm:118,date:'Friday, 21 August',n:36},
- {id:'D',light:'cool',tempo:'slow',bpm:68,date:'Thursday, 20 August',n:30},
+ {id:'1',light:'warm',tempo:'slow',bpm:68},
+ {id:'2',light:'warm',tempo:'fast',bpm:118},
+ {id:'3',light:'cool',tempo:'slow',bpm:68},
+ {id:'4',light:'cool',tempo:'fast',bpm:118},
 ];
 const gallery=[
  {src:gallery01,alt:'Warm-lit display wall inside The Hanger UCL Store'},
@@ -24,7 +24,7 @@ const gallery=[
 
 <section id="explore" class="explore-room wrap" aria-labelledby="explore-heading">
   <div class="section-line light-line"><span>02 · Explore room</span><span>Four sensory conditions</span></div>
-  <div class="explore-heading"><div><p class="eyebrow">UCL Store experiment</p><h2 id="explore-heading">Explore the room.</h2></div><p>Select a condition to change the lighting context and hear a 30-second excerpt of its musical tempo.</p></div>
+  <div class="explore-heading"><div><p class="eyebrow">UCL Store experiment</p><h2 id="explore-heading">Explore the experimental conditions.</h2></div><p>Select a condition to change the lighting context and hear a 30-second excerpt of its musical tempo.</p></div>
   <div class="explore-stage" data-room-light="warm">
     <div class="room-media" aria-live="polite">
       <Image class="room-photo room-photo-warm" src={warm} alt="The UCL Store under warm lighting" widths={[800,1400,2000]} sizes="(max-width:760px) 100vw, 92vw" width={2000} height={1333} loading="lazy" />
@@ -33,8 +33,8 @@ const gallery=[
     </div>
     <div class="room-conditions" role="group" aria-label="Experimental conditions">
       {conditions.map(c=><button class="room-condition" data-combination={c.bpm} data-light={c.light} data-condition={c.id} aria-pressed="false" aria-label={`Play 30-second excerpt: Condition ${c.id}, ${c.light} light + ${c.bpm} BPM`}>
-        <span class="condition-index">Condition {c.id}</span><strong>{c.light === 'warm'?'Warm':'Cool'} + {c.tempo}</strong>
-        <span class="condition-card-meta"><span>{c.bpm} BPM</span><span>n = {c.n}</span></span><span class="condition-date">{c.date}</span>
+        <span class="condition-index">Condition {c.id}</span><strong>{c.light === 'warm'?'Warm':'Cool'} + {c.tempo === 'fast'?'FAST':'Slow'}</strong>
+        <span class="condition-card-meta"><span>{c.bpm} BPM</span></span>
         <span class="sample-action" aria-hidden="true"><span class="sample-icon"><svg class="sample-play" viewBox="0 0 20 20" width="14" height="14"><path d="M5 3v14l12-7Z" fill="currentColor" /></svg><svg class="sample-stop" viewBox="0 0 20 20" width="14" height="14"><path d="M4 4h12v12H4Z" fill="currentColor" /></svg></span><span class="sample-text">Listen · 30 sec</span></span><span class="sample-progress" aria-hidden="true"></span>
       </button>)}
     </div>
@@ -48,15 +48,21 @@ const gallery=[
   <div class="light-study-heading"><h2 id="light-heading">A different tempo.<br />A different light.<br />The same space.</h2><p>The store shifts in atmosphere while its architecture stays constant. Three field views hold that change side by side.</p></div>
   <div class="light-triptych">
     <figure><div><Image src={warm} alt="The store under warm light" widths={[480,800]} sizes="(max-width:760px) 86vw, 31vw" width={1200} height={800} loading="lazy" /></div><figcaption><span>01</span><strong>Warm</strong><small>Lower colour temperature</small></figcaption></figure>
-    <figure><div><Image src={neutral} alt="The store under neutral light" widths={[480,800]} sizes="(max-width:760px) 86vw, 31vw" width={1024} height={576} loading="lazy" /></div><figcaption><span>02</span><strong>Neutral</strong><small>Reference condition</small></figcaption></figure>
+    <figure><div><Image src={neutral} alt="The store under neutral light" widths={[480,800]} sizes="(max-width:760px) 86vw, 31vw" width={1200} height={1319} loading="lazy" /></div><figcaption><span>02</span><strong>Neutral</strong><small>Baseline condition</small></figcaption></figure>
     <figure><div><Image src={cool} alt="The store under cool light" widths={[480,800]} sizes="(max-width:760px) 86vw, 31vw" width={1200} height={800} loading="lazy" /></div><figcaption><span>03</span><strong>Cool</strong><small>Higher colour temperature</small></figcaption></figure>
   </div>
 </section>
 
 <ListeningRoom />
 
+<section id="film" class="project-film wrap" aria-labelledby="film-heading">
+  <div class="section-line light-line"><span>Moving light</span><span>Warm / neutral / cool</span></div>
+  <div class="film-heading"><div><p class="eyebrow">The space in transition</p><h2 id="film-heading">Light changes the room.</h2></div><p>A silent study of the same retail setting as its colour temperature shifts.</p></div>
+  <figure class="field-film"><video id="field-film" muted playsinline loop controls preload="metadata" poster={neutral.src} width="1024" height="576" aria-label="Silent video showing changes in the store's lighting temperature"><source src="/video/new-video.mp4" type="video/mp4" /></video><figcaption><span>The Hanger · UCL Store</span><span>Silent film · 0:18</span></figcaption></figure>
+</section>
+
 <section id="gallery" class="project-gallery" aria-labelledby="gallery-heading">
-  <div class="wrap"><div class="section-line light-line"><span>Project notes</span><span>Field documentation</span></div><div class="gallery-heading"><div><p class="eyebrow">Inside the study</p><h2 id="gallery-heading">Project in view.</h2></div><p>Four details from the UCL Store, including the space, its lighting and the environmental measurements.</p></div></div>
+  <div class="wrap"><div class="section-line light-line"><span>05 · Project in view</span><span>Field documentation</span></div><div class="gallery-heading"><div><p class="eyebrow">Inside the study</p><h2 id="gallery-heading">Project in view.</h2></div><p>Four details from the UCL Store, including the space, its lighting and the environmental measurements.</p></div></div>
   <div class="gallery-shell">
     <div class="gallery-viewport" data-gallery tabindex="0" aria-label="Project photo gallery">
       {gallery.map((item,i)=><figure class="gallery-slide" data-gallery-slide aria-label={`Photo ${i+1} of ${gallery.length}`}><Image src={item.src} alt={item.alt} widths={[640,1000,1600,2200]} sizes="(max-width:760px) 88vw, 78vw" loading="lazy" /><figcaption><span>{String(i+1).padStart(2,'0')} / {String(gallery.length).padStart(2,'0')}</span><span>Field documentation · The Hanger</span></figcaption></figure>)}
