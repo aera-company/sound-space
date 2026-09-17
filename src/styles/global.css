@@ -282,7 +282,7 @@ body,button,input,select,textarea{font-family:var(--sans)}
 .project-film{padding-block:34px 42px}
 .film-heading{padding-block:22px 18px}
 .field-film{width:min(100%,520px);margin-left:0;margin-right:auto;overflow:hidden}
-.field-film video{width:100%;aspect-ratio:1568/1515;object-fit:cover;object-position:center}
+.field-film video{width:100%;aspect-ratio:1568/1515;object-fit:cover;object-position:91% center}
 @media(max-width:900px){
   .explore-stage{width:100%;grid-template-columns:minmax(0,1fr) 255px}
 }

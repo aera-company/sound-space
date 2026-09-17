@@ -48,6 +48,7 @@ const assert = require('node:assert/strict');
   assert.equal(await page.locator('[data-gallery-current]').textContent(),'2');
   assert.equal(await page.locator('#field-film source').getAttribute('src'),'/video/new-video.mp4');
   assert.equal(await page.locator('#field-film').evaluate(el=>getComputedStyle(el).objectFit),'cover');
+  assert.match(await page.locator('#field-film').evaluate(el=>getComputedStyle(el).objectPosition),/^91%/);
   assert.equal(await page.locator('.field-film').evaluate(el=>el.getBoundingClientRect().width<=521),true,'cropped film should fit with its complete section in one desktop viewport');
   assert.equal(await page.locator('.project-film').evaluate(section=>Math.abs(section.getBoundingClientRect().left-section.querySelector('.field-film').getBoundingClientRect().left)<=1),true,'film should align to the left project grid');
   await page.screenshot({path:'/tmp/sound-space-desktop.png',fullPage:true});
