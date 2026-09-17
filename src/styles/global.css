@@ -289,3 +289,28 @@ body,button,input,select,textarea{font-family:var(--sans)}
   .explore-stage{display:block}
   .field-film{width:100%}
 }
+
+/* Lock the photograph and cards into one continuous panel. */
+.explore-stage{
+  display:flex;
+  align-items:stretch;
+  gap:0;
+}
+.room-media{
+  flex:1 1 auto;
+  min-width:0;
+  align-self:flex-start;
+}
+.room-conditions{
+  flex:0 0 285px;
+  width:285px;
+  margin-left:-1px;
+  align-self:stretch;
+}
+@media(max-width:900px){
+  .room-conditions{flex-basis:255px;width:255px}
+}
+@media(max-width:760px){
+  .explore-stage{display:block}
+  .room-conditions{width:100%;margin-left:0}
+}
