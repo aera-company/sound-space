@@ -40,7 +40,7 @@ const gallery=[
 
 <section id="explore" class="explore-room wrap" aria-labelledby="explore-heading">
   <div class="section-line light-line"><span aria-hidden="true"></span><span>Four sensory conditions</span></div>
-  <div class="explore-heading"><div><p class="eyebrow">UCL Store experiment</p><h2 id="explore-heading">Explore the experimental conditions.</h2></div><p>Select a condition to change the lighting context and hear a 30-second excerpt of its musical tempo.</p></div>
+  <div class="explore-heading"><div><p class="eyebrow">UCL Store experiment</p><h2 id="explore-heading">Explore the experimental conditions</h2></div><p>Select a condition to change the lighting context and hear a 30-second excerpt of its musical tempo.</p></div>
   <div class="explore-stage" data-room-light="warm">
     <div class="room-media" aria-live="polite">
       <Image class="room-photo room-photo-warm" src={warm} alt="The UCL Store under warm lighting" widths={[800,1400,2000]} sizes="(max-width:760px) 100vw, 92vw" width={2000} height={1333} loading="lazy" />
@@ -61,7 +61,7 @@ const gallery=[
 
 <section id="light" class="light-study wrap" aria-labelledby="light-heading">
   <div class="section-line light-line"><span>03 · Light study</span><span>Warm / neutral / cool</span></div>
-  <div class="light-study-heading"><h2 id="light-heading">A different tempo.<br />A different light.<br />The same space.</h2><p>The store shifts in atmosphere while its architecture stays constant. Three field views hold that change side by side.</p></div>
+  <div class="light-study-heading"><h2 id="light-heading">Lightning</h2><p>The store shifts in atmosphere while its architecture stays constant. Three field views hold that change side by side.</p></div>
   <div class="light-triptych">
     <figure><div><Image src={lightWarm} alt="The store under warm light" widths={[480,800]} sizes="(max-width:760px) 86vw, 31vw" width={1568} height={1515} loading="lazy" /></div><figcaption><span>01</span><strong>Warm</strong><small>Lower colour temperature</small></figcaption></figure>
     <figure><div><Image src={lightBaseline} alt="The store under baseline light" widths={[480,800]} sizes="(max-width:760px) 86vw, 31vw" width={1568} height={1515} loading="lazy" /></div><figcaption><span>02</span><strong>Neutral</strong><small>Baseline condition</small></figcaption></figure>
@@ -73,12 +73,12 @@ const gallery=[
 
 <section id="film" class="project-film wrap" aria-labelledby="film-heading">
   <div class="section-line light-line"><span>Moving light</span><span>Warm / neutral / cool</span></div>
-  <div class="film-heading"><div><p class="eyebrow">The space in transition</p><h2 id="film-heading">Lighting.</h2></div><p>A silent study of the same retail setting as its colour temperature shifts.</p></div>
+  <div class="film-heading"><div><p class="eyebrow">The space in transition</p><h2 id="film-heading">A different tempo<br />A different light<br />The same space</h2></div><p>A silent study of the same retail setting as its colour temperature shifts.</p></div>
   <figure class="field-film"><video id="field-film" muted playsinline loop controls preload="metadata" poster={lightBaseline.src} width="1024" height="576" aria-label="Silent video showing changes in the store's lighting temperature"><source src="/video/new-video.mp4" type="video/mp4" /></video><figcaption><span>The Hanger · UCL Store</span><span>Silent film · 0:18</span></figcaption></figure>
 </section>
 
 <section id="gallery" class="project-gallery" aria-labelledby="gallery-heading">
-  <div class="wrap"><div class="section-line light-line"><span>05 · Project in view</span><span>Field documentation</span></div><div class="gallery-heading"><div><p class="eyebrow">Inside the study</p><h2 id="gallery-heading">Project in view.</h2></div><p>Eleven details from the UCL Store, including the space, its lighting and the environmental measurements.</p></div></div>
+  <div class="wrap"><div class="section-line light-line"><span>05 · Project in view</span><span>Field documentation</span></div><div class="gallery-heading"><div><p class="eyebrow">Inside the study</p><h2 id="gallery-heading">Project in view</h2></div><p>Eleven details from the UCL Store, including the space, its lighting and the environmental measurements.</p></div></div>
   <div class="gallery-shell">
     <div class="gallery-viewport" data-gallery tabindex="0" aria-label="Project photo gallery">
       {gallery.map((item,i)=><figure class="gallery-slide" data-gallery-slide aria-label={`Photo ${i+1} of ${gallery.length}`}><Image src={item.src} alt={item.alt} widths={[640,1000,1600,2200]} sizes="(max-width:760px) 75vw, 66vw" loading="lazy" /><figcaption><span>{String(i).padStart(2,'0')} / 10</span><span>Field documentation · The Hanger</span></figcaption></figure>)}

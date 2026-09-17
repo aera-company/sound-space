@@ -133,3 +133,40 @@ h1,h2,h3,.footer-title,.room-condition>strong,.light-triptych figcaption strong{
   .gallery-dots{gap:2px}
   .gallery-dots button{width:18px}
 }
+
+/* September 17: unified typography and compact experimental conditions. */
+:root{--serif:var(--sans)}
+body,button,input,select,textarea{font-family:var(--sans)}
+#explore-heading,
+#light-heading,
+#analysis-heading,
+#film-heading,
+#gallery-heading{
+  font-family:var(--sans)!important;
+  font-size:clamp(40px,4.25vw,62px);
+  font-weight:600;
+  line-height:1.02;
+  letter-spacing:-.045em;
+}
+.room-media{height:clamp(300px,32vw,440px);aspect-ratio:auto}
+.room-condition{min-height:148px;padding:16px 18px}
+.room-condition>strong{font-family:var(--sans);font-size:21px;font-weight:600;margin-top:12px}
+.room-condition .condition-card-meta{margin-top:7px}
+.room-condition .sample-action{min-height:34px;padding-top:6px}
+.choice-tempo,.choice-mood{font-family:var(--sans)}
+.choice-tempo{font-weight:600}
+.choice-mood{font-weight:500}
+.footer-title{font-family:var(--sans)!important;font-size:clamp(18px,2.25vw,32px);font-weight:600;letter-spacing:-.035em}
+.footer-title span{font-size:19px}
+@media(max-width:760px){
+  #explore-heading,
+  #light-heading,
+  #analysis-heading,
+  #film-heading,
+  #gallery-heading{font-size:36px}
+  .room-media{height:260px;aspect-ratio:auto}
+  .room-condition{min-height:138px;padding:14px}
+  .room-condition>strong{font-size:18px;margin-top:10px}
+  .room-condition .sample-action{min-height:32px;padding-top:4px}
+  .footer-title{font-size:18px}
+}
