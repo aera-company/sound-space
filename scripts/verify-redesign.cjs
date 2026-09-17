@@ -59,9 +59,10 @@ const assert = require('node:assert/strict');
   await mobile.goto(siteUrl,{waitUntil:'networkidle'});
   assert.equal(await mobile.locator('.room-condition').count(),4);
   assert.equal(await mobile.locator('.gallery-slide').count(),11);
-  const mobileHeroTitle=await mobile.locator('#page-title').evaluate(el=>{const style=getComputedStyle(el);return{lines:Math.round(el.getBoundingClientRect().height/parseFloat(style.lineHeight)),usesAvailableWidth:el.getBoundingClientRect().width>=el.parentElement.getBoundingClientRect().width-1};});
+  const mobileHeroTitle=await mobile.locator('#page-title').evaluate(el=>{const style=getComputedStyle(el);const title=el.getBoundingClientRect();const visual=document.querySelector('.cover-visual').getBoundingClientRect();const group=el.parentElement.getBoundingClientRect();return{lines:Math.round(title.height/parseFloat(style.lineHeight)),usesAvailableWidth:title.width>=group.width-1,verticallyCentered:Math.abs((group.top+group.height/2)-(visual.top+visual.height/2))<=2};});
   assert.equal(mobileHeroTitle.usesAvailableWidth,true,'mobile hero title should use the full text column');
   assert.equal(mobileHeroTitle.lines<=5,true,'mobile hero title should stay within five balanced lines');
+  assert.equal(mobileHeroTitle.verticallyCentered,true,'mobile hero title and subtitle should be vertically centered in the photograph');
   assert.equal(await mobile.locator('body').evaluate(el=>el.scrollWidth<=innerWidth+1),true,'mobile page should not overflow horizontally');
   await mobile.screenshot({path:'/tmp/sound-space-mobile.png',fullPage:true});
   for(const width of [375,430]){

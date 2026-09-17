@@ -127,7 +127,7 @@ h1,h2,h3,.footer-title,.room-condition>strong,.light-triptych figcaption strong{
   margin-inline:auto;
 }
 @media(max-width:760px){
-  .project-cover .cover-body{top:137px}
+  .project-cover .cover-body{top:121px;justify-content:center}
   .project-cover .cover-title h1{
     width:100%;
     max-width:none;
