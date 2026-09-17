@@ -95,3 +95,17 @@ h1,h2,h3,.footer-title,.room-condition>strong,.light-triptych figcaption strong{
 .gallery-slide{flex-basis:min(66.3vw,1003px)}.gallery-slide img{height:clamp(365px,49.3vw,646px)}
 @media(max-width:1100px){.project-cover .cover-body{width:calc(100% - 64px)}.project-cover .cover-footer{grid-template-columns:1.4fr .75fr 1.5fr;gap:28px}.project-cover .cover-title{width:72%}.project-cover .cover-title h1{font-size:clamp(37px,4.8vw,55px)}.room-media{aspect-ratio:1.42/1}}
 @media(max-width:760px){.project-cover .cover-visual{height:560px}.project-cover .cover-visual img{object-position:58% center}.project-cover .cover-visual::after{background:linear-gradient(90deg,rgba(51,28,82,.96),rgba(51,28,82,.72) 68%,rgba(51,28,82,.27))}.project-cover .cover-body{top:121px;width:calc(100% - 40px);height:560px;align-items:center}.project-cover .cover-title{width:100%}.project-cover .cover-title h1{font-size:clamp(31px,8.7vw,42px);max-width:15ch}.project-cover .cover-subtitle{font-size:15px;max-width:30ch}.project-cover .cover-footer{grid-template-columns:1fr;gap:23px;padding-block:26px 32px}.project-cover .cover-supervisors{grid-template-columns:1fr 1fr;gap:20px}.room-media{aspect-ratio:4/3}.room-photo{object-position:center 45%}.explore-heading h2{font-size:40px}.room-condition>strong{font-size:20px}.light-study-heading h2{font-size:39px}.chart-footer{overflow-x:auto}.chart-footer p{flex:0 0 auto;font-size:10px}.project-film{padding-block:55px 62px}.film-heading{display:block;padding-block:34px 26px}.film-heading h2{font-size:43px}.film-heading>p{font-size:12px;margin-top:18px}.gallery-slide{flex-basis:74.8vw}.gallery-slide img{height:48vh;min-height:300px;max-height:520px}}
+
+/* September 17: full-width masthead and updated project photography. */
+.project-cover .masthead{
+  width:100%;
+  max-width:none;
+  margin:0;
+  padding-inline:max(56px,calc((100% - 1440px)/2));
+  border-top:0;
+}
+.light-triptych figure>div{aspect-ratio:1/1}
+.light-triptych img{object-fit:cover;object-position:center}
+.gallery-slide img{object-fit:contain;background:#f1edf4}
+@media(max-width:1100px){.project-cover .masthead{padding-inline:32px}}
+@media(max-width:760px){.project-cover .masthead{padding-inline:20px}}
