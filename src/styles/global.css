@@ -211,3 +211,20 @@ body,button,input,select,textarea{font-family:var(--sans)}
   .room-condition:nth-child(2n){border-right:0}
   .room-condition:nth-last-child(-n+2){border-bottom:0}
 }
+
+/* Keep the complete section 02 field photograph, including the floor. */
+.explore-stage{
+  width:min(100%,1040px);
+  margin-inline:auto;
+  grid-template-columns:minmax(0,1.85fr) minmax(290px,1fr);
+}
+.room-media{height:auto;aspect-ratio:2679/2944;background:#f2eef5}
+.room-photo{object-fit:contain;object-position:center bottom}
+@media(max-width:900px){
+  .explore-stage{grid-template-columns:minmax(0,1.55fr) minmax(255px,.85fr)}
+  .room-media{height:auto;aspect-ratio:2679/2944}
+}
+@media(max-width:760px){
+  .explore-stage{width:100%}
+  .room-media{height:auto;aspect-ratio:2679/2944}
+}
