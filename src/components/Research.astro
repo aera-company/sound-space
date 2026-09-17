@@ -39,7 +39,7 @@ const gallery=[
 ---
 
 <section id="explore" class="explore-room wrap" aria-labelledby="explore-heading">
-  <div class="section-line light-line"><span>02 · Explore room</span><span>Four sensory conditions</span></div>
+  <div class="section-line light-line"><span aria-hidden="true"></span><span>Four sensory conditions</span></div>
   <div class="explore-heading"><div><p class="eyebrow">UCL Store experiment</p><h2 id="explore-heading">Explore the experimental conditions.</h2></div><p>Select a condition to change the lighting context and hear a 30-second excerpt of its musical tempo.</p></div>
   <div class="explore-stage" data-room-light="warm">
     <div class="room-media" aria-live="polite">
@@ -49,7 +49,7 @@ const gallery=[
     </div>
     <div class="room-conditions" role="group" aria-label="Experimental conditions">
       {conditions.map(c=><button class="room-condition" data-combination={c.bpm} data-light={c.light} data-condition={c.id} aria-pressed="false" aria-label={`Play 30-second excerpt: Condition ${c.id}, ${c.light} light + ${c.bpm} BPM`}>
-        <span class="condition-index">Condition {c.id}</span><strong>{c.light === 'warm'?'Warm':'Cool'} + {c.tempo === 'fast'?'FAST':'Slow'}</strong>
+        <span class="condition-index">Condition {c.id}</span><strong>{c.light === 'warm'?'Warm':'Cool'} + {c.tempo === 'fast'?'Fast':'Slow'}</strong>
         <span class="condition-card-meta"><span>{c.bpm} BPM</span></span>
         <span class="sample-action" aria-hidden="true"><span class="sample-icon"><svg class="sample-play" viewBox="0 0 20 20" width="14" height="14"><path d="M5 3v14l12-7Z" fill="currentColor" /></svg><svg class="sample-stop" viewBox="0 0 20 20" width="14" height="14"><path d="M4 4h12v12H4Z" fill="currentColor" /></svg></span><span class="sample-text">Listen · 30 sec</span></span><span class="sample-progress" aria-hidden="true"></span>
       </button>)}
@@ -73,7 +73,7 @@ const gallery=[
 
 <section id="film" class="project-film wrap" aria-labelledby="film-heading">
   <div class="section-line light-line"><span>Moving light</span><span>Warm / neutral / cool</span></div>
-  <div class="film-heading"><div><p class="eyebrow">The space in transition</p><h2 id="film-heading">Light changes the room.</h2></div><p>A silent study of the same retail setting as its colour temperature shifts.</p></div>
+  <div class="film-heading"><div><p class="eyebrow">The space in transition</p><h2 id="film-heading">Lighting.</h2></div><p>A silent study of the same retail setting as its colour temperature shifts.</p></div>
   <figure class="field-film"><video id="field-film" muted playsinline loop controls preload="metadata" poster={lightBaseline.src} width="1024" height="576" aria-label="Silent video showing changes in the store's lighting temperature"><source src="/video/new-video.mp4" type="video/mp4" /></video><figcaption><span>The Hanger · UCL Store</span><span>Silent film · 0:18</span></figcaption></figure>
 </section>
 

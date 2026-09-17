@@ -109,3 +109,27 @@ h1,h2,h3,.footer-title,.room-condition>strong,.light-triptych figcaption strong{
 .gallery-slide img{object-fit:contain;background:#f1edf4}
 @media(max-width:1100px){.project-cover .masthead{padding-inline:32px}}
 @media(max-width:760px){.project-cover .masthead{padding-inline:20px}}
+
+/* September 17: cover, soundscape and proportional horizontal gallery. */
+.project-cover .cover-title h1{font-size:clamp(32px,3.55vw,54px)}
+.analysis-header h2{font-size:clamp(52px,5.8vw,84px);line-height:.94;letter-spacing:-.055em}
+.field-film{background:transparent}
+.field-film video{height:auto;aspect-ratio:auto;object-fit:contain;background:#000}
+.project-gallery{background:#fff}
+.gallery-viewport{align-items:flex-start;gap:clamp(16px,2vw,30px)}
+.gallery-slide{flex:0 0 auto}
+.gallery-slide img{
+  width:auto;
+  height:clamp(292px,39.4vw,517px);
+  max-width:min(72vw,900px);
+  object-fit:contain;
+  background:transparent;
+  margin-inline:auto;
+}
+@media(max-width:760px){
+  .project-cover .cover-title h1{font-size:clamp(25px,6.7vw,32px);max-width:17ch}
+  .analysis-header h2{font-size:48px}
+  .gallery-slide img{height:clamp(240px,38.4vh,416px);max-width:82vw}
+  .gallery-dots{gap:2px}
+  .gallery-dots button{width:18px}
+}
