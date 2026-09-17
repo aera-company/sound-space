@@ -265,3 +265,27 @@ body,button,input,select,textarea{font-family:var(--sans)}
   .room-condition::before{top:14px;bottom:14px}
   .room-condition .sample-action{margin-top:9px}
 }
+
+/* Compact film frame and luminous Warm/Cool condition rail. */
+.explore-stage{
+  width:min(100%,980px);
+  grid-template-columns:minmax(0,1fr) 285px;
+}
+.room-condition::before{
+  width:3px;
+  opacity:1;
+  background:linear-gradient(180deg,transparent,var(--condition-accent) 18%,var(--condition-accent) 82%,transparent);
+  box-shadow:0 0 12px var(--condition-accent);
+}
+.room-light-label i{box-shadow:0 0 10px #c88436}
+.explore-stage[data-room-light=cool] .room-light-label i{box-shadow:0 0 10px #86d4fb}
+.project-film{padding-block:34px 42px}
+.film-heading{padding-block:22px 18px}
+.field-film{width:min(100%,700px);margin-inline:auto}
+@media(max-width:900px){
+  .explore-stage{width:100%;grid-template-columns:minmax(0,1fr) 255px}
+}
+@media(max-width:760px){
+  .explore-stage{display:block}
+  .field-film{width:100%}
+}
