@@ -281,7 +281,8 @@ body,button,input,select,textarea{font-family:var(--sans)}
 .explore-stage[data-room-light=cool] .room-light-label i{box-shadow:0 0 10px #86d4fb}
 .project-film{padding-block:34px 42px}
 .film-heading{padding-block:22px 18px}
-.field-film{width:min(100%,700px);margin-inline:auto}
+.field-film{width:min(100%,520px);margin-left:0;margin-right:auto;overflow:hidden}
+.field-film video{width:100%;aspect-ratio:1568/1515;object-fit:cover;object-position:center}
 @media(max-width:900px){
   .explore-stage{width:100%;grid-template-columns:minmax(0,1fr) 255px}
 }
